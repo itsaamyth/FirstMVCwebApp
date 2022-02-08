@@ -19,6 +19,7 @@ namespace FirstMVCwebApp.Controllers
             return View(objCategoryList);
         }
 
+
         //Creating a Category
         //GET
         public IActionResult CreateCategory()

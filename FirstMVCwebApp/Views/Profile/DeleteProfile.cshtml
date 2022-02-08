@@ -1,0 +1,62 @@
+﻿@model Profile 
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Delete Profile</h2>
+            <hr/>
+        </div>
+@*        <div asp-validation-summary="All"></div>*@
+        <div class="mb-3">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" disabled class="form-control"/>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+                <div class="mb-3">
+            <label asp-for="Phone"></label>
+            <input asp-for="Phone" disabled class="form-control"/>
+            <span asp-validation-for="Phone" class="text-danger"></span>
+
+        </div>                <div class="mb-3">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" disabled class="form-control"/>
+            <span asp-validation-for="Email" class="text-danger"></span>
+
+        </div>
+                        <div class="mb-3">
+            <label asp-for="Age"></label>
+            <input asp-for="Age" disabled class="form-control"/>
+            <span asp-validation-for="Age" class="text-danger"></span>
+
+        </div>
+                                <div class="mb-3">
+            <label asp-for="Gender"></label>
+            <select asp-for="Gender" disabled class="form-control">
+                <option>Male</option>
+                <option>Female</option>
+            </select>
+            <span asp-validation-for="Age" class="text-danger"></span>
+
+        </div>
+
+                        <div class="mb-3">
+            <label asp-for="Address"></label>
+            <input asp-for="Address" disabled class="form-control"/>
+            <span asp-validation-for="Address" class="text-danger"></span>
+
+        </div>
+
+        <button type="submit" class="btn btn-danger" style="width:150px">Delete</button>
+        <a asp-controller="Profile" asp-action="Index" class="btn btn-secondary" style="width:150px">
+            Back to List
+        </a>
+
+    </div>
+</form>
+
+<!-- Method to use any Partial View present in Shared Folder -->
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial"/>
+    }
+}
