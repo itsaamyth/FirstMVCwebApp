@@ -1,0 +1,169 @@
+﻿@*@model IEnumerable<>*@
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<h1>Index Form</h1>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Form Data</h2>
+        </div>
+        <div class="col-6 text-end">
+            <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Fill New Form
+            </button>
+        </div>
+    </div>
+
+    <br/><br/>
+
+<table class="table table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                Profile Id
+            </th> 
+            <th>
+                Name
+            </th>
+            <th>
+                Phone
+            </th>
+                        <th>
+               Email
+            </th>
+                        <th>
+                Age
+            </th>
+                        <th>
+                Gender
+            </th>
+                        <th>
+                Address
+            </th>
+        </tr>
+    </thead>
+@*    <tbody>
+        @foreach(var obj in Model)
+        {
+            <tr>
+                <td width="8%">
+                    @obj.Id
+                </td>
+                <td width="20%">
+                    @obj.Name
+                </td>
+                                <td width="20%">
+                    @obj.Phone
+                </td>
+                                <td width="20%">
+                    @obj.Email
+                </td>
+                                <td width="5%">
+                    @obj.Age
+                </td>
+                                <td width="5%">
+                    @obj.Gender
+                </td>
+                                <td width="40%">
+                    @obj.Address
+                </td>
+                <td> 
+                    <div class="w-75 btn-group" role="group">
+                        <a asp-controller="Profile" asp-action="EditProfile" asp-route-id="@obj.Id" class="btn btn-primary mx-2" ><i class="bi bi-pencil-square"></i>Edit</a>
+                        <a asp-controller="Profile" asp-action="DeleteProfile" asp-route-id="@obj.Id" class="btn btn-danger mx-2" ><i class="bi bi-trash-fill"></i>Delete</a>
+
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>*@
+</table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Registration Form</h5>
+      </div>
+      <div class="modal-body">
+          <form>
+<div>
+    <h3> Primary Details </h3>
+<div class="row">
+    <div class="col">
+        <label>First Name:</label>
+      <input type="text" class="form-control">
+    </div>
+    <div class="col">
+        <label>Last Name:</label>
+      <input type="text" class="form-control" >
+    </div>
+  </div>
+   <br/>
+  <div class="row">
+    <div class="col">
+        <label>Gender:</label>
+<select class="form-select">
+  <option selected>Choose  Gender</option>
+  <option value="1">Male</option>
+  <option value="2">Female</option>
+</select>
+    </div>
+    <div class="col">
+        <label>Date of Birth:</label>
+      <input type="date" class="form-control" >
+    </div>
+  </div>
+  </div>
+  <br/>
+  <div>
+    <h3> Contact Details </h3>
+<div class="row">
+    <div class="col">
+        <label>Email:</label>
+      <input type="text" class="form-control">
+    </div>
+    <div class="col">
+        <label>Phone:</label>
+      <input type="number" class="form-control" >
+    </div>
+  </div>
+</div>
+
+<br />
+
+  <div>
+    <h3> Address Details </h3>
+<div class="row">
+    <div class="col">
+        <label>Permanent Address</label>
+        <br/><br/>
+      <textarea class="form-control" id="PerAddress"></textarea>
+    </div>
+    <div class="col">
+        <label>Current Address</label>
+       <div class="form-group">
+          <input type="checkbox" class="form-check-input" id="checkBox"  onclick="FillAddressInput()"> Same as permanent address
+       </div>
+      <textarea class="form-control" id="CurAddress"></textarea>
+    </div>
+  </div>
+</div>
+<br/>
+</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
