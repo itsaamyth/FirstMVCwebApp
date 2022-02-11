@@ -1,4 +1,5 @@
 ﻿using FirstMVCwebApp.Data;
+using FirstMVCwebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FirstMVCwebApp.Controllers
@@ -11,9 +12,20 @@ namespace FirstMVCwebApp.Controllers
         {
             _db = db;
         }
+        //GET
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<Form> objFormList = _db.FormData;
+            return View(objFormList);
+        }
+
+        //POST
+        [HttpPost]
+        public IActionResult FillForm(Form obj)
+        {
+            _db.FormData.Add(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

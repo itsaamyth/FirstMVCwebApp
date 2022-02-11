@@ -1,7 +1,5 @@
-﻿@*@model IEnumerable<>*@
-@{
-    ViewData["Title"] = "Index";
-}
+﻿@model IEnumerable<Form>
+
 
 
 <h1>Index Form</h1>
@@ -12,7 +10,7 @@
             <h2 class="text-primary">Form Data</h2>
         </div>
         <div class="col-6 text-end">
-            <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary">
+            <button type="button" data-bs-toggle="modal" data-bs-target="#RegisterFormModal" class="btn btn-primary">
                 <i class="bi bi-plus-circle"></i> Fill New Form
             </button>
         </div>
@@ -21,32 +19,8 @@
     <br/><br/>
 
 <table class="table table-bordered table-striped" style="width:100%">
-    <thead>
-        <tr>
-            <th>
-                Profile Id
-            </th> 
-            <th>
-                Name
-            </th>
-            <th>
-                Phone
-            </th>
-                        <th>
-               Email
-            </th>
-                        <th>
-                Age
-            </th>
-                        <th>
-                Gender
-            </th>
-                        <th>
-                Address
-            </th>
-        </tr>
-    </thead>
-@*    <tbody>
+
+    <tbody>
         @foreach(var obj in Model)
         {
             <tr>
@@ -54,70 +28,74 @@
                     @obj.Id
                 </td>
                 <td width="20%">
-                    @obj.Name
+                    @obj.FirstName
                 </td>
                                 <td width="20%">
-                    @obj.Phone
+                    @obj.LastName
                 </td>
                                 <td width="20%">
                     @obj.Email
                 </td>
                                 <td width="5%">
-                    @obj.Age
+                    @obj.Phone
                 </td>
                                 <td width="5%">
                     @obj.Gender
                 </td>
                                 <td width="40%">
-                    @obj.Address
+                    @obj.DOB
                 </td>
                 <td> 
                     <div class="w-75 btn-group" role="group">
-                        <a asp-controller="Profile" asp-action="EditProfile" asp-route-id="@obj.Id" class="btn btn-primary mx-2" ><i class="bi bi-pencil-square"></i>Edit</a>
-                        <a asp-controller="Profile" asp-action="DeleteProfile" asp-route-id="@obj.Id" class="btn btn-danger mx-2" ><i class="bi bi-trash-fill"></i>Delete</a>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#EditFormModal" class="btn btn-primary mx-2">
+                        <i class="bi bi-pencil-square"></i>Edit Form
+                     </button>
+                     <button type="button" data-bs-toggle="modal" data-bs-target="#EditFormModal" class="btn btn-danger mx-2">
+                        <i class="bi bi-trash-fill"></i> Delete Form
+                     </button>
 
                     </div>
                 </td>
             </tr>
         }
-    </tbody>*@
+    </tbody>
 </table>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Register Form Modal -->
+<div class="modal fade" id="RegisterFormModal" tabindex="-1" aria-labelledby="RegisterFormModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Registration Form</h5>
       </div>
       <div class="modal-body">
-          <form>
+          <form method="post" asp-action="FillForm">
 <div>
     <h3> Primary Details </h3>
 <div class="row">
     <div class="col">
         <label>First Name:</label>
-      <input type="text" class="form-control">
+      <input name="FirstName" type="text" class="form-control">
     </div>
     <div class="col">
         <label>Last Name:</label>
-      <input type="text" class="form-control" >
+      <input name="LastName" type="text" class="form-control" >
     </div>
   </div>
    <br/>
   <div class="row">
     <div class="col">
         <label>Gender:</label>
-<select class="form-select">
+<select name="Gender" class="form-select">
   <option selected>Choose  Gender</option>
-  <option value="1">Male</option>
-  <option value="2">Female</option>
+  <option value="Male">Male</option>
+  <option value="Female">Female</option>
 </select>
     </div>
     <div class="col">
         <label>Date of Birth:</label>
-      <input type="date" class="form-control" >
+      <input name="DOB" type="date" class="form-control" >
     </div>
   </div>
   </div>
@@ -126,12 +104,12 @@
     <h3> Contact Details </h3>
 <div class="row">
     <div class="col">
-        <label>Email:</label>
-      <input type="text" class="form-control">
+        <label >Email:</label>
+      <input name="Email" type="text" class="form-control">
     </div>
     <div class="col">
-        <label>Phone:</label>
-      <input type="number" class="form-control" >
+        <label >Phone:</label>
+      <input name="Phone" type="number" maxlength="10" class="form-control"  >
     </div>
   </div>
 </div>
@@ -144,26 +122,222 @@
     <div class="col">
         <label>Permanent Address</label>
         <br/><br/>
-      <textarea class="form-control" id="PerAddress"></textarea>
+      <textarea name="PermanentAddress" class="form-control" id="PerAddress"></textarea>
     </div>
     <div class="col">
         <label>Current Address</label>
        <div class="form-group">
           <input type="checkbox" class="form-check-input" id="checkBox"  onclick="FillAddressInput()"> Same as permanent address
        </div>
-      <textarea class="form-control" id="CurAddress"></textarea>
+      <textarea name="CurrentAddress" class="form-control" id="CurAddress"></textarea>
     </div>
   </div>
 </div>
-<br/>
+<br />
+  <div>
+    <h3> Educational Details </h3>
+<div class="row">
+    <div class="col">
+        <label >Undergraduate Course</label>
+        <br/>
+<select name="UgCourse" class="form-select">
+  <option selected>Choose Course</option>
+  <option value="B.Tech">B.tech</option>
+  <option value="B.Arch">B.Arch</option>
+  <option value="B.Com">B.Com</option>
+  <option value="BBA">BBA</option>
+  <option value="BA">BA</option>
+</select>
+    </div>
+    <div class="col">
+        <label>Stream</label>
+        <br/>
+<select class="form-select" name="Stream">
+  <option selected>Choose Stream</option>
+  <option value="CS">CS</option>
+  <option value="IT">IT</option>
+  <option value="ME">ME</option>
+  <option value="CSE">CSE</option>
+  <option value="EE">EE</option>
+  <option value="Arts">Arts</option>
+  <option value="Commerce">Commerce</option>
+</select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+        <label>12th Percentage</label>
+        <br/>
+      <input type="number" name="TwelfthMarks" class="form-control" >
+    </div>
+    <div class="col">
+        <label>10th Percentage</label>
+        <br/>
+      <input name="TenthMarks" type="number" class="form-control" >
+    </div>
+  </div>
+</div>
+<br />
+  <div>
+    <h3> Tell Us About Urself</h3>
+<div class="row">
+    <div class="col">
+      <textarea name="StudentBio" class="form-control" rows="5" placeholder="Student Bio"></textarea>
+    </div>
+  </div>
+</div>
+      <div class="modal-footer">
+        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Reset</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
 </form>
       </div>
-      <div class="modal-footer">
+@*      <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+      </div>*@
     </div>
   </div>
 </div>
 
+
+<!--Edit Modal -->
+<div class="modal fade" id="EditFormModal" tabindex="-1" aria-labelledby="EditFormModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Form</h5>
+      </div>
+      <div class="modal-body">
+          <form method="post" asp-action="FillForm">
+<div>
+    <h3> Primary Details </h3>
+<div class="row">
+    <div class="col">
+        <label>First Name:</label>
+      <input name="FirstName" type="text" class="form-control">
+    </div>
+    <div class="col">
+        <label>Last Name:</label>
+      <input name="LastName" type="text" class="form-control" >
+    </div>
+  </div>
+   <br/>
+  <div class="row">
+    <div class="col">
+        <label>Gender:</label>
+<select name="Gender" class="form-select">
+  <option selected>Choose  Gender</option>
+  <option value="1">Male</option>
+  <option value="2">Female</option>
+</select>
+    </div>
+    <div class="col">
+        <label>Date of Birth:</label>
+      <input name="DOB" type="date" class="form-control" >
+    </div>
+  </div>
+  </div>
+  <br/>
+  <div>
+    <h3> Contact Details </h3>
+<div class="row">
+    <div class="col">
+        <label >Email:</label>
+      <input name="Email" type="text" class="form-control">
+    </div>
+    <div class="col">
+        <label >Phone:</label>
+      <input name="Phone" type="number" maxlength="10" class="form-control"  >
+    </div>
+  </div>
+</div>
+
+<br />
+
+  <div>
+    <h3> Address Details </h3>
+<div class="row">
+    <div class="col">
+        <label>Permanent Address</label>
+        <br/><br/>
+      <textarea name="PermanentAddress" class="form-control" id="PerAddress"></textarea>
+    </div>
+    <div class="col">
+        <label>Current Address</label>
+       <div class="form-group">
+          <input type="checkbox" class="form-check-input" id="checkBox"  onclick="FillAddressInput()"> Same as permanent address
+       </div>
+      <textarea name="CurrentAddress" class="form-control" id="CurAddress"></textarea>
+    </div>
+  </div>
+</div>
+<br />
+  <div>
+    <h3> Educational Details </h3>
+<div class="row">
+    <div class="col">
+        <label >Undergraduate Course</label>
+        <br/>
+<select name="UgCourse" class="form-select">
+  <option selected>Choose Course</option>
+  <option value="1">B.tech</option>
+  <option value="2">B.Arch</option>
+  <option value="3">B.Com</option>
+  <option value="4">BBA</option>
+  <option value="5">BA</option>
+</select>
+    </div>
+    <div class="col">
+        <label>Stream</label>
+        <br/>
+<select class="form-select" name="Stream">
+  <option selected>Choose Stream</option>
+  <option value="1">CS</option>
+  <option value="2">IT</option>
+  <option value="3">ME</option>
+  <option value="4">CSE</option>
+  <option value="5">EE</option>
+  <option value="6">Arts</option>
+  <option value="7">Commerce</option>
+</select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+        <label>12th Percentage</label>
+        <br/>
+      <input type="number" name="TwelfthMarks" class="form-control" >
+    </div>
+    <div class="col">
+        <label>10th Percentage</label>
+        <br/>
+      <input name="TenthMarks" type="number" class="form-control" >
+    </div>
+  </div>
+</div>
+<br />
+  <div>
+    <h3> Tell Us About Yourself</h3>
+<div class="row">
+    <div class="col">
+      <textarea name="StudentBio" class="form-control" rows="5" placeholder="Student Bio"></textarea>
+    </div>
+  </div>
+</div>
+      <div class="modal-footer">
+        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Reset</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+</form>
+      </div>
+@*      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>*@
+    </div>
+  </div>
+</div>
 

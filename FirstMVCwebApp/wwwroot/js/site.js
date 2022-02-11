@@ -11,7 +11,7 @@ function FillAddressInput() {
 
         let PerAddressValue = PerAddress.value;
         curAddress.value = PerAddressValue;
-        curAddress.disabled = true;
+       // curAddress.disabled = true;
     }
     else {
         curAddress.value = "";
