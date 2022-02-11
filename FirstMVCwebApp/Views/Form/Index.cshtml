@@ -1,7 +1,5 @@
 ﻿@model IEnumerable<Form>
 
-
-
 <h1>Index Form</h1>
 
 <div class="container p-3">
@@ -19,11 +17,36 @@
     <br/><br/>
 
 <table class="table table-bordered table-striped" style="width:100%">
-
+        <thead>
+        <tr>
+            <th>
+                Student Id
+            </th> 
+            <th>
+                First Name
+            </th>
+            <th>
+                Last Name
+            </th>
+                        <th>
+               Email
+            </th>
+                        <th>
+               Phone
+            </th>
+                        <th>
+                Gender
+            </th>
+                        <th>
+                DOB 
+            </th>
+        </tr>
+    </thead>
     <tbody>
         @foreach(var obj in Model)
         {
-            <tr>
+      
+                <tr>
                 <td width="8%">
                     @obj.Id
                 </td>
@@ -47,9 +70,16 @@
                 </td>
                 <td> 
                     <div class="w-75 btn-group" role="group">
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#EditFormModal" class="btn btn-primary mx-2">
+                    <button type="button" id=@obj.Id onClick="reply_click(this.id)" data-bs-toggle="modal" data-bs-target="#EditFormModal" class="btn btn-primary mx-2">
                         <i class="bi bi-pencil-square"></i>Edit Form
                      </button>
+                     <script type="text/javascript">
+                         function reply_click(clicked_id){
+                         var stdID = clicked_id;
+                         console.log(stdID);
+                         console.log(@Model)
+                         }
+                    </script>
                      <button type="button" data-bs-toggle="modal" data-bs-target="#EditFormModal" class="btn btn-danger mx-2">
                         <i class="bi bi-trash-fill"></i> Delete Form
                      </button>
@@ -105,7 +135,7 @@
 <div class="row">
     <div class="col">
         <label >Email:</label>
-      <input name="Email" type="text" class="form-control">
+      <input name="Email" type="text" class="form-control" value="">
     </div>
     <div class="col">
         <label >Phone:</label>
