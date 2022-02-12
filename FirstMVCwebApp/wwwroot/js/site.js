@@ -18,3 +18,50 @@ function FillAddressInput() {
         curAddress.disabled = false;
     }
 }
+
+$(document).ready(function () {
+    $(function () {
+        $(".edit").click(function () {
+            var StdId = $(this).closest("tr").find(".id").text().trim();
+            var firstName = $(this).closest("tr").find(".firstName").text().trim();
+            var lastName = $(this).closest("tr").find(".lastName").text().trim();
+            var email = $(this).closest("tr").find(".email").text().trim();
+            var phone = $(this).closest("tr").find(".phone").text().trim();
+
+            let editId = document.getElementById("StdId");
+            let editFirst = document.getElementById("edit1");
+            let editLast = document.getElementById("edit2");
+            let editEmail = document.getElementById("edit3");
+            let editPhone = document.getElementById("edit4");
+
+            editId.value = StdId;
+            editFirst.value = firstName;
+            editLast.value = lastName;
+            editEmail.value = email;
+            editPhone.value = phone;
+
+            console.log("success");
+        })
+        $(".delete").click(function () {
+            var StdId = $(this).closest("tr").find(".id").text().trim();
+/*            var firstName = $(this).closest("tr").find(".firstName").text().trim();
+            var lastName = $(this).closest("tr").find(".lastName").text().trim();
+            var email = $(this).closest("tr").find(".email").text().trim();
+            var phone = $(this).closest("tr").find(".phone").text().trim();*/
+
+            let delId = document.getElementById("StdId2");
+/*            let editFirst = document.getElementById("edit1");
+            let editLast = document.getElementById("edit2");
+            let editEmail = document.getElementById("edit3");
+            let editPhone = document.getElementById("edit4");*/
+
+            delId.value = StdId;
+/*            editFirst.value = firstName;
+            editLast.value = lastName;
+            editEmail.value = email;
+            editPhone.value = phone;*/
+
+            console.log("success");
+        })
+    })
+});

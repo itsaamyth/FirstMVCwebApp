@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<Form>
 
+
 <h1>Index Form</h1>
 
 <div class="container p-3">
@@ -47,19 +48,19 @@
         {
       
                 <tr>
-                <td width="8%">
+                <td width="8%" class="id">
                     @obj.Id
                 </td>
-                <td width="20%">
+                <td width="20%" class="firstName" >
                     @obj.FirstName
                 </td>
-                                <td width="20%">
+                                <td width="20%" class="lastName">
                     @obj.LastName
                 </td>
-                                <td width="20%">
+                                <td width="20%" class="email">
                     @obj.Email
                 </td>
-                                <td width="5%">
+                                <td width="5%" class="phone">
                     @obj.Phone
                 </td>
                                 <td width="5%">
@@ -70,17 +71,10 @@
                 </td>
                 <td> 
                     <div class="w-75 btn-group" role="group">
-                    <button type="button" id=@obj.Id onClick="reply_click(this.id)" data-bs-toggle="modal" data-bs-target="#EditFormModal" class="btn btn-primary mx-2">
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#EditFormModal" class="btn btn-primary mx-2 edit">
                         <i class="bi bi-pencil-square"></i>Edit Form
                      </button>
-                     <script type="text/javascript">
-                         function reply_click(clicked_id){
-                         var stdID = clicked_id;
-                         console.log(stdID);
-                         console.log(@Model)
-                         }
-                    </script>
-                     <button type="button" data-bs-toggle="modal" data-bs-target="#EditFormModal" class="btn btn-danger mx-2">
+                     <button type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-danger mx-2 delete">
                         <i class="bi bi-trash-fill"></i> Delete Form
                      </button>
 
@@ -240,17 +234,18 @@
         <h5 class="modal-title" id="exampleModalLabel">Edit Form</h5>
       </div>
       <div class="modal-body">
-          <form method="post" asp-action="FillForm">
+          <form method="post" asp-action="EditForm">
 <div>
     <h3> Primary Details </h3>
 <div class="row">
+    <input name="Id" id="StdId" type="text" hidden/>
     <div class="col">
         <label>First Name:</label>
-      <input name="FirstName" type="text" class="form-control">
+      <input name="FirstName" id="edit1" type="text" class="form-control">
     </div>
     <div class="col">
         <label>Last Name:</label>
-      <input name="LastName" type="text" class="form-control" >
+      <input name="LastName" id="edit2" type="text" class="form-control" >
     </div>
   </div>
    <br/>
@@ -275,11 +270,11 @@
 <div class="row">
     <div class="col">
         <label >Email:</label>
-      <input name="Email" type="text" class="form-control">
+      <input name="Email" id="edit3" type="text" class="form-control">
     </div>
     <div class="col">
         <label >Phone:</label>
-      <input name="Phone" type="number" maxlength="10" class="form-control"  >
+      <input name="Phone" id="edit4" type="number" maxlength="10" class="form-control"  >
     </div>
   </div>
 </div>
@@ -371,3 +366,19 @@
   </div>
 </div>
 
+<!--Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+          <form asp-action="DeleteForm" method="post">
+       <h3>Are you sure ?</h3>
+           <input name="Id" id="StdId2" type="text" hidden/>
+       <br />
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" asp-action="deleteForm" class="btn btn-primary">Yes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

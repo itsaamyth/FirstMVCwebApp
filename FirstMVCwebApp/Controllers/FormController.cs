@@ -27,5 +27,25 @@ namespace FirstMVCwebApp.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        //PUT
+        [HttpPost]
+        public IActionResult EditForm(Form obj)
+        {
+            _db.FormData.Update(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        //Delete
+        [HttpPost]
+        public IActionResult DeleteForm(Form obj)
+        {
+            _db.FormData.Remove(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+
     }
 }
