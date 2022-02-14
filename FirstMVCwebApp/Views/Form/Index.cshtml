@@ -244,26 +244,26 @@
     <input name="Id" id="StdId" type="text" hidden/>
     <div class="col">
         <label>First Name:</label>
-      <input name="FirstName" id="edit1" type="text" class="form-control">
+      <input name="FirstName" id="EditFirstName" type="text" class="form-control">
     </div>
     <div class="col">
         <label>Last Name:</label>
-      <input name="LastName" id="edit2" type="text" class="form-control" >
+      <input name="LastName" id="EditLastName" type="text" class="form-control" >
     </div>
   </div>
    <br/>
   <div class="row">
     <div class="col">
         <label>Gender:</label>
-<select name="Gender" class="form-select">
+<select name="Gender" id="EditGender" class="form-select">
   <option selected>Choose  Gender</option>
-  <option value="1">Male</option>
-  <option value="2">Female</option>
+  <option value="Male">Male</option>
+  <option value="Female">Female</option>
 </select>
     </div>
     <div class="col">
         <label>Date of Birth:</label>
-      <input name="DOB" type="date" class="form-control" >
+      <input name="DOB" id="EditDob" type="date" class="form-control" >
     </div>
   </div>
   </div>
@@ -273,11 +273,11 @@
 <div class="row">
     <div class="col">
         <label >Email:</label>
-      <input name="Email" id="edit3" type="text" class="form-control">
+      <input name="Email" id="EditEmail" type="text" class="form-control">
     </div>
     <div class="col">
         <label >Phone:</label>
-      <input name="Phone" id="edit4" type="number" maxlength="10" class="form-control"  >
+      <input name="Phone" id="EditPhone" type="number" maxlength="10" class="form-control"  >
     </div>
   </div>
 </div>
@@ -308,27 +308,27 @@
     <div class="col">
         <label >Undergraduate Course</label>
         <br/>
-<select name="UgCourse" class="form-select">
+<select name="UgCourse" id="EditUgCourse" class="form-select">
   <option selected>Choose Course</option>
-  <option value="1">B.tech</option>
-  <option value="2">B.Arch</option>
-  <option value="3">B.Com</option>
-  <option value="4">BBA</option>
-  <option value="5">BA</option>
+  <option value="B.Tech">B.tech</option>
+  <option value="B.Arch">B.Arch</option>
+  <option value="B.Com">B.Com</option>
+  <option value="BBA">BBA</option>
+  <option value="BA">BA</option>
 </select>
     </div>
     <div class="col">
         <label>Stream</label>
         <br/>
-<select class="form-select" name="Stream">
+<select class="form-select" id="EditStream" name="Stream">
   <option selected>Choose Stream</option>
-  <option value="1">CS</option>
-  <option value="2">IT</option>
-  <option value="3">ME</option>
-  <option value="4">CSE</option>
-  <option value="5">EE</option>
-  <option value="6">Arts</option>
-  <option value="7">Commerce</option>
+  <option value="CS">CS</option>
+  <option value="IT">IT</option>
+  <option value="ME">ME</option>
+  <option value="CSE">CSE</option>
+  <option value="EE">EE</option>
+  <option value="Arts">Arts</option>
+  <option value="Commerce">Commerce</option>
 </select>
     </div>
   </div>
@@ -337,12 +337,12 @@
     <div class="col">
         <label>12th Percentage</label>
         <br/>
-      <input type="number" name="TwelfthMarks" class="form-control" >
+      <input type="number" name="TwelfthMarks" id="EditTwelfthMarks" class="form-control" >
     </div>
     <div class="col">
         <label>10th Percentage</label>
         <br/>
-      <input name="TenthMarks" type="number" class="form-control" >
+      <input name="TenthMarks" type="number" id="EditTenthMarks" class="form-control" >
     </div>
   </div>
 </div>
@@ -351,7 +351,7 @@
     <h3> Tell Us About Yourself</h3>
 <div class="row">
     <div class="col">
-      <textarea name="StudentBio" class="form-control" rows="5" placeholder="Student Bio"></textarea>
+      <textarea name="StudentBio" id="EditBio" class="form-control" rows="5" placeholder="Student Bio"></textarea>
     </div>
   </div>
 </div>

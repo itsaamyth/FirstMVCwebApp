@@ -42,7 +42,8 @@ function EditAddressInput() {
 
 $(document).ready(function () {
     $(function () {
-        $(".edit").click(function () {
+  /*        Edit Function Using Html&Js */
+ /*       $("").click(function () {
             var StdId = $(this).closest("tr").find(".id").text().trim();
             var firstName = $(this).closest("tr").find(".firstName").text().trim();
             var lastName = $(this).closest("tr").find(".lastName").text().trim();
@@ -63,32 +64,17 @@ $(document).ready(function () {
             editPhone.value = phone;
 
             console.log("success");
-        })
+        })*/
         $(".delete").click(function () {
             var StdId = $(this).closest("tr").find(".id").text().trim();
-/*            var firstName = $(this).closest("tr").find(".firstName").text().trim();
-            var lastName = $(this).closest("tr").find(".lastName").text().trim();
-            var email = $(this).closest("tr").find(".email").text().trim();
-            var phone = $(this).closest("tr").find(".phone").text().trim();*/
-
             let delId = document.getElementById("StdId2");
-/*            let editFirst = document.getElementById("edit1");
-            let editLast = document.getElementById("edit2");
-            let editEmail = document.getElementById("edit3");
-            let editPhone = document.getElementById("edit4");*/
-
             delId.value = StdId;
-/*            editFirst.value = firstName;
-            editLast.value = lastName;
-            editEmail.value = email;
-            editPhone.value = phone;*/
-
             console.log("success");
         })
     })
 });
 
-
+/*View Data Using Ajax*/
 $(document).ready(function () {
     $(function () {
         $(".view").click(function () {
@@ -154,6 +140,81 @@ $(document).ready(function () {
                         var Bio = result.studentBio
                         let ViewBio = document.getElementById("ViewBio");
                         ViewBio.innerHTML = Bio
+
+
+                        console.log("Success")
+                    }
+                });
+        })
+
+       /* Edit Data Using Ajax*/
+        $(".edit").click(function () {
+            var StdId = $(this).closest("tr").find(".id").text().trim();
+            $.ajax(
+                {
+                    url: `/Form/GetAllData/${StdId}`,
+                    type: "GET",
+                    async: false,
+                    dataType: "json",
+                    contentType: "application/json;",
+                    // dataAjax: JSON.stringify(),
+                    success: function (result) {
+                        console.log(result)
+
+                        let EditStdId = document.getElementById("StdId");
+                        EditStdId.value = StdId
+
+                        var firstName = result.firstName
+                        let EditFirstName = document.getElementById("EditFirstName");
+                        EditFirstName.value = firstName
+
+                        var lastName = result.lastName
+                        let EditLastName = document.getElementById("EditLastName");
+                        EditLastName.value = lastName
+
+                        var gender = result.gender
+                        const $select = document.querySelector('#EditGender');
+                        $select.value = gender
+
+                        var dob = result.dob
+                        let EditDOB = document.getElementById("EditDob");
+                        EditDOB.value = dob
+
+                        var email = result.email
+                        let EditEmail = document.getElementById("EditEmail");
+                        EditEmail.value = email
+
+                        var phone = result.phone
+                        let EditPhone = document.getElementById("EditPhone");
+                        EditPhone.value = phone
+
+                        var PerAddress = result.permanentAddress
+                        let EditPerAddress = document.getElementById("EditPerAddress");
+                        EditPerAddress.value = PerAddress
+
+                        var CurrAddress = result.currentAddress
+                        let EditCurrAdd = document.getElementById("EditCurrAdd");
+                        EditCurrAdd.value = CurrAddress
+
+                        var ugCourse = result.ugCourse
+                        let EditUgCourse = document.getElementById("EditUgCourse");
+                        EditUgCourse.value = ugCourse
+
+                        var ugStream = result.stream
+                        let EditStream = document.getElementById("EditStream");
+                        EditStream.value = ugStream
+
+                        var Twelfth = result.twelfthMarks
+                        let EditTwelfthMarks = document.getElementById("EditTwelfthMarks");
+                        EditTwelfthMarks.value = Twelfth
+
+                        var Tenth = result.tenthMarks
+                        let EditTenthMarks = document.getElementById("EditTenthMarks");
+                        EditTenthMarks.value = Tenth
+
+                        var Bio = result.studentBio
+                        let EditBio = document.getElementById("EditBio");
+                        EditBio.innerHTML = Bio
 
 
                         console.log("Success")
