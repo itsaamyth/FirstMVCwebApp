@@ -6,16 +6,37 @@
 function FillAddressInput() {
     let checkBox = document.getElementById("checkBox");
     let PerAddress = document.getElementById("PerAddress");
-    let curAddress = document.getElementById("CurAddress");
+    let CurrAdd = document.getElementById("CurrAdd");
+    let EditCurrAdd = document.getElementById("EditCurrAdd");
+
     if (checkBox.checked == true) {
 
         let PerAddressValue = PerAddress.value;
-        curAddress.value = PerAddressValue;
-       // curAddress.disabled = true;
+        CurrAdd.value = PerAddressValue;
+
     }
     else {
-        curAddress.value = "";
-        curAddress.disabled = false;
+        CurrAdd.value = "";
+        CurrAdd.disabled = false;
+    }
+}
+
+function EditAddressInput() {
+    let checkBox = document.getElementById("EditCheckBox");
+    let EditPerAdd = document.getElementById("EditPerAddress");
+    let EditCurrAdd = document.getElementById("EditCurrAdd");
+
+    if (checkBox.checked == true) {
+
+        let EditPerAddValue = EditPerAdd.value;
+        EditCurrAdd.value = EditPerAddValue;
+
+        EditCurrAdd.disabled = true;
+
+    }
+    else {
+        EditCurrAdd.value = "";
+        EditCurrAdd.disabled = false;
     }
 }
 
@@ -25,6 +46,7 @@ $(document).ready(function () {
             var StdId = $(this).closest("tr").find(".id").text().trim();
             var firstName = $(this).closest("tr").find(".firstName").text().trim();
             var lastName = $(this).closest("tr").find(".lastName").text().trim();
+            var gender = $(this).closest("tr").find(".gender").text().trim();
             var email = $(this).closest("tr").find(".email").text().trim();
             var phone = $(this).closest("tr").find(".phone").text().trim();
 
@@ -65,3 +87,80 @@ $(document).ready(function () {
         })
     })
 });
+
+
+$(document).ready(function () {
+    $(function () {
+        $(".view").click(function () {
+            var StdId = $(this).closest("tr").find(".id").text().trim();
+            $.ajax(
+                {
+                    url: `/Form/GetAllData/${StdId}`,
+                    type: "GET",
+                    async: false,
+                    dataType: "json",
+                    contentType: "application/json;",
+                   // dataAjax: JSON.stringify(),
+                    success: function (result) {
+                        console.log(result)
+                        var firstName = result.firstName
+                        let ViewFirstName = document.getElementById("ViewFirstName");
+                        ViewFirstName.innerHTML = firstName
+
+                        var lastName = result.lastName
+                        let ViewLastName = document.getElementById("ViewLastName");
+                        ViewLastName.innerHTML = lastName
+
+                        var gender = result.gender
+                        let ViewGender = document.getElementById("ViewGender");
+                        ViewGender.innerHTML = gender
+
+                        var dob = result.dob
+                        let ViewDOB = document.getElementById("ViewDOB");
+                        ViewDOB.innerHTML = dob
+
+                        var email = result.email
+                        let ViewEmail = document.getElementById("ViewEmail");
+                        ViewEmail.innerHTML = email
+
+                        var phone = result.phone
+                        let ViewPhone = document.getElementById("ViewPhone");
+                        ViewPhone.innerHTML = phone
+
+                        var PerAddress = result.permanentAddress
+                        let ViewPerAdd = document.getElementById("ViewPerAdd");
+                        ViewPerAdd.innerHTML = PerAddress
+
+                        var CurrAddress = result.currentAddress
+                        let ViewCurrAdd = document.getElementById("ViewCurrAdd");
+                        ViewCurrAdd.innerHTML = CurrAddress
+
+                        var ugCourse = result.ugCourse
+                        let ViewUgCourse = document.getElementById("ViewUgCourse");
+                        ViewUgCourse.innerHTML = ugCourse
+
+                        var ugStream = result.stream
+                        let ViewStream = document.getElementById("ViewStream");
+                        ViewStream.innerHTML = ugStream
+
+                        var Twelfth = result.twelfthMarks
+                        let ViewTwelfth = document.getElementById("ViewTwelfth");
+                        ViewTwelfth.innerHTML = Twelfth+"%"
+
+                        var Tenth = result.tenthMarks
+                        let ViewTenth = document.getElementById("ViewTenth");
+                        ViewTenth.innerHTML = Tenth+"%"
+
+                        var Bio = result.studentBio
+                        let ViewBio = document.getElementById("ViewBio");
+                        ViewBio.innerHTML = Bio
+
+
+                        console.log("Success")
+                    }
+                });
+        })
+    
+    }
+    )
+})

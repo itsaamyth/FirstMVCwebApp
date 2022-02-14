@@ -63,19 +63,22 @@
                                 <td width="5%" class="phone">
                     @obj.Phone
                 </td>
-                                <td width="5%">
+                                <td width="5%" class="gender">
                     @obj.Gender
                 </td>
-                                <td width="40%">
+                                <td width="40%" class="dob">
                     @obj.DOB
                 </td>
                 <td> 
                     <div class="w-75 btn-group" role="group">
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#EditFormModal" class="btn btn-primary mx-2 edit">
-                        <i class="bi bi-pencil-square"></i>Edit Form
+                     <button type="button" style="padding:8px 9px" data-bs-toggle="modal" data-bs-target="#ViewFormModal" class="btn btn-info mx-2 view">
+                        <i class="bi bi-eye-fill"></i>View
                      </button>
-                     <button type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-danger mx-2 delete">
-                        <i class="bi bi-trash-fill"></i> Delete Form
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#EditFormModal" style="padding:8px 9px" class="btn btn-primary mx-2 edit">
+                        <i class="bi bi-pencil-square"></i>Edit
+                     </button>
+                     <button type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" style="padding:8px 9px" class="btn btn-danger mx-2 delete">
+                        <i class="bi bi-trash-fill"></i> Delete
                      </button>
 
                     </div>
@@ -153,7 +156,7 @@
        <div class="form-group">
           <input type="checkbox" class="form-check-input" id="checkBox"  onclick="FillAddressInput()"> Same as permanent address
        </div>
-      <textarea name="CurrentAddress" class="form-control" id="CurAddress"></textarea>
+      <textarea name="CurrentAddress" id="CurrAdd" class="form-control"></textarea>
     </div>
   </div>
 </div>
@@ -287,14 +290,14 @@
     <div class="col">
         <label>Permanent Address</label>
         <br/><br/>
-      <textarea name="PermanentAddress" class="form-control" id="PerAddress"></textarea>
+      <textarea name="PermanentAddress" class="form-control" id="EditPerAddress"></textarea>
     </div>
     <div class="col">
         <label>Current Address</label>
        <div class="form-group">
-          <input type="checkbox" class="form-check-input" id="checkBox"  onclick="FillAddressInput()"> Same as permanent address
+          <input type="checkbox" class="form-check-input" id="EditCheckBox"  onclick="EditAddressInput()"> Same as permanent address
        </div>
-      <textarea name="CurrentAddress" class="form-control" id="CurAddress"></textarea>
+      <textarea name="CurrentAddress" class="form-control" id="EditCurrAdd"></textarea>
     </div>
   </div>
 </div>
@@ -357,6 +360,122 @@
         <button type="submit" class="btn btn-primary">Save changes</button>
       </div>
 </form>
+      </div>
+@*      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>*@
+    </div>
+  </div>
+</div>
+
+<!--View Modal -->
+<div class="modal fade" id="ViewFormModal" tabindex="-1" aria-labelledby="ViewFormModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ViewModalLabel">View Data</h5>
+      </div>
+      <div class="modal-body">
+<div>
+    <h4> Primary Details </h4>
+<div class="row">
+    <input name="Id" id="StdId" type="text" hidden/>
+    <div class="col">
+        <label>First Name:</label>
+        <h4 id="ViewFirstName"></h4>
+    </div>
+    <div class="col">
+        <label id="ViewFirstName">Last Name:</label>
+        <h4 id="ViewLastName"></h4>
+    </div>
+  </div>
+   <br/>
+  <div class="row">
+    <div class="col">
+        <label>Gender:</label>
+        <h4 id="ViewGender"></h4>
+    </div>
+    <div class="col">
+        <label>Date of Birth:</label>
+        <h4 id="ViewDOB"></h4>
+    </div>
+  </div>
+  </div>
+  <br/>
+  <div>
+    <h4> Contact Details </h4>
+<div class="row">
+    <div class="col">
+        <label >Email:</label>
+        <h4 id="ViewEmail"></h4>
+    </div>
+    <div class="col">
+        <label >Phone:</label>
+        <h4 id="ViewPhone"></h4>
+    </div>
+  </div>
+</div>
+
+<br />
+
+  <div>
+    <h4> Address Details </h4>
+<div class="row">
+    <div class="col">
+        <label>Permanent Address:</label>
+        <br/>
+        <h4 id="ViewPerAdd"></h4>
+    </div>
+    <div class="col">
+        <label>Current Address:</label>
+                <br/>
+        <h4 id="ViewCurrAdd"></h4>
+    </div>
+  </div>
+</div>
+<br />
+  <div>
+    <h4> Educational Details </h4>
+<div class="row">
+    <div class="col">
+        <label >Undergraduate Course:</label>
+        <br/>
+        <h4 id="ViewUgCourse"></h4>
+    </div>
+    <div class="col">
+        <label>Stream:</label>
+        <br/>
+        <h4 id="ViewStream"></h4>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+        <label>12th Percentage:</label>
+        <br/>
+        <h4 id="ViewTwelfth"></h4>
+    </div>
+    <div class="col">
+        <label>10th Percentage:</label>
+        <br/>
+        <h4 id="ViewTenth"></h4>
+    </div>
+  </div>
+</div>
+<br />
+  <div>
+    <h4> Tell Us About Yourself:</h4>
+<div class="row">
+    <div class="col">
+        <h5 id="ViewBio"></h5>
+    </div>
+  </div>
+</div>
+      <div class="modal-footer">
+        <button type="reset" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+@*        <button type="button" data-bs-toggle="modal" data-bs-target="#EditFormModal" class="btn btn-primary">Edit Data</button>*@
+      </div>
       </div>
 @*      <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

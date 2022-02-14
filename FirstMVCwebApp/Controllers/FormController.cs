@@ -13,6 +13,7 @@ namespace FirstMVCwebApp.Controllers
             _db = db;
         }
         //GET
+        [HttpGet]
         public IActionResult Index()
         {
             IEnumerable<Form> objFormList = _db.FormData;
@@ -44,6 +45,18 @@ namespace FirstMVCwebApp.Controllers
             _db.FormData.Remove(obj);
             _db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+/*        [HttpGet("{id}")]*/
+        public JsonResult GetAllData(int Id)
+        {
+            var obj = _db.FormData.Find(Id);
+/*            if (obj == null)
+           {
+                return NotFound();
+            }*/
+       
+            return Json(obj);
         }
 
 
