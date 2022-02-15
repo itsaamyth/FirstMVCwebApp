@@ -23,8 +23,12 @@ namespace FirstMVCwebApp.Models
         public string PermanentAddress { get; set; }
         [Required]
         public string CurrentAddress { get; set; }
+        /*        [Required]
+                public string UgCourse { get; set; }*/
+
         [Required]
-        public string UgCourse { get; set; }
+        public string CourseId { get; set; }
+        public Courses Courses { get; set; }
         [Required]
         public string Stream { get; set; }
         [Required]
