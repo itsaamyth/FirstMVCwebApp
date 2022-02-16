@@ -15,6 +15,11 @@ namespace FirstMVCwebApp.Data
 
         public DbSet<Form> FormData { get; set; }
 
+        public DbSet<Courses> Courses { get; set; }
+        public DbSet<Models.Stream> Streams { get; set; }
+
+
+
 
     }
 }

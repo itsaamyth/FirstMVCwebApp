@@ -8,6 +8,5 @@ namespace FirstMVCwebApp.Models
         public int StreamId { get; set; }
         [Required]
         public string StreamName { get; set; }
-        public DateTime CreatedDateTime { get; set; } = DateTime.Now;
     }
 }

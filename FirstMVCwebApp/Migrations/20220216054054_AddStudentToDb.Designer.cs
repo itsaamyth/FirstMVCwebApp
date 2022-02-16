@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FirstMVCwebApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220211060750_RegistrationForm")]
-    partial class RegistrationForm
+    [Migration("20220216054054_AddStudentToDb")]
+    partial class AddStudentToDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,6 +47,23 @@ namespace FirstMVCwebApp.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("FirstMVCwebApp.Models.Courses", b =>
+                {
+                    b.Property<int>("CourseId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CourseId"), 1L, 1);
+
+                    b.Property<string>("CourseName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CourseId");
+
+                    b.ToTable("Courses");
+                });
+
             modelBuilder.Entity("FirstMVCwebApp.Models.Form", b =>
                 {
                     b.Property<int>("Id")
@@ -54,6 +71,9 @@ namespace FirstMVCwebApp.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("CoursesCourseId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("datetime2");
@@ -89,9 +109,8 @@ namespace FirstMVCwebApp.Migrations
                     b.Property<int>("Phone")
                         .HasColumnType("int");
 
-                    b.Property<string>("Stream")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("StreamId")
+                        .HasColumnType("int");
 
                     b.Property<string>("StudentBio")
                         .IsRequired()
@@ -103,11 +122,11 @@ namespace FirstMVCwebApp.Migrations
                     b.Property<int>("TwelfthMarks")
                         .HasColumnType("int");
 
-                    b.Property<string>("UgCourse")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("CoursesCourseId");
+
+                    b.HasIndex("StreamId");
 
                     b.ToTable("FormData");
                 });
@@ -144,6 +163,42 @@ namespace FirstMVCwebApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Profiles");
+                });
+
+            modelBuilder.Entity("FirstMVCwebApp.Models.Stream", b =>
+                {
+                    b.Property<int>("StreamId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StreamId"), 1L, 1);
+
+                    b.Property<string>("StreamName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("StreamId");
+
+                    b.ToTable("Streams");
+                });
+
+            modelBuilder.Entity("FirstMVCwebApp.Models.Form", b =>
+                {
+                    b.HasOne("FirstMVCwebApp.Models.Courses", "Courses")
+                        .WithMany()
+                        .HasForeignKey("CoursesCourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FirstMVCwebApp.Models.Stream", "Stream")
+                        .WithMany()
+                        .HasForeignKey("StreamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Courses");
+
+                    b.Navigation("Stream");
                 });
 #pragma warning restore 612, 618
         }

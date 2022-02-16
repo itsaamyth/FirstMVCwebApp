@@ -25,12 +25,9 @@ namespace FirstMVCwebApp.Models
         public string CurrentAddress { get; set; }
         /*        [Required]
                 public string UgCourse { get; set; }*/
-
-        [Required]
-        public string CourseId { get; set; }
-        public Courses Courses { get; set; }
-        [Required]
-        public string Stream { get; set; }
+/*        Foreign Key Method*/
+        public virtual Courses Courses { get; set; }
+        public virtual Stream Stream{ get; set; }
         [Required]
         public int TwelfthMarks { get; set; }
         [Required]

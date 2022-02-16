@@ -8,6 +8,6 @@ namespace FirstMVCwebApp.Models
         public int CourseId { get; set; }
         [Required]
         public string CourseName { get; set; }
-        public DateTime CreatedDateTime { get; set; } = DateTime.Now;
+        
     }
 }

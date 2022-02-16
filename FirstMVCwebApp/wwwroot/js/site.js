@@ -221,6 +221,52 @@ $(document).ready(function () {
                     }
                 });
         })
+
+        /* Course Data Using Ajax*/
+        $(".RegisterBtn").click(function () {
+
+            $.ajax(
+                {
+                    url: `/Course/GetAllCourses/`,
+                    type: "GET",
+                    async: false,
+                    dataType: "json",
+                    contentType: "application/json;",
+                    // dataAjax: JSON.stringify(),
+                    success: function (result) {
+                        console.log(result)
+                        $.each(result, function (key, value) {
+                            $('#UgCourse')
+                                .append($('<option>', { value: value.courseId })
+                                    .text(value.courseName));
+                        });
+                        console.log("Success")
+                    }
+                },
+            );
+        })
+        $(".RegisterBtn").click(function () {
+
+            $.ajax(
+                {
+                    url: `/Stream/GetAllStream/`,
+                    type: "GET",
+                    async: false,
+                    dataType: "json",
+                    contentType: "application/json;",
+                    // dataAjax: JSON.stringify(),
+                    success: function (result) {
+                        console.log(result)
+                        $.each(result, function (key, value) {
+                            $('#Stream')
+                                .append($('<option>', { value: value.streamId })
+                                    .text(value.streamName));
+                        });
+                        console.log("Success")
+                    }
+                }
+            );
+        })
     
     }
     )
