@@ -93,6 +93,7 @@ $(document).ready(function () {
                         let ViewFirstName = document.getElementById("ViewFirstName");
                         ViewFirstName.innerHTML = firstName
 
+
                         var lastName = result.lastName
                         let ViewLastName = document.getElementById("ViewLastName");
                         ViewLastName.innerHTML = lastName
@@ -145,6 +146,7 @@ $(document).ready(function () {
                         console.log("Success")
                     }
                 });
+            console.log("Midd Process")
         })
 
        /* Edit Data Using Ajax*/
