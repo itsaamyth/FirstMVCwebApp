@@ -47,16 +47,38 @@ namespace FirstMVCwebApp.Controllers
             return RedirectToAction("Index");
         }
 
-/*        [HttpGet("{id}")]*/
+        /*        [HttpGet("{id}")]*/
+        /*        public JsonResult GetAllData(int Id)
+                {
+                    var obj = _db.FormData.Find(Id);
+                    return Json(obj);
+                }*/
+
         public JsonResult GetAllData(int Id)
         {
-            var obj = _db.FormData.Find(Id);
-/*            if (obj == null)
-           {
-                return NotFound();
-            }*/
-       
-            return Json(obj);
+            var studentJoinResult = from studentDb in _db.FormData // outer sequence
+                                  join courseDb in _db.Course //inner sequence 
+                                  on studentDb.CourseId equals courseDb.CourseId // key selector 
+                                  join streamDb in _db.Stream //inner sequence 
+                                  on studentDb.StreamId equals streamDb.StreamId // key selector 
+                                  where studentDb.Id == Id        
+                                  select new
+                                  { // result selector 
+                                      FirstName = studentDb.FirstName,
+                                      LastName = studentDb.LastName,
+                                      Gender = studentDb.Gender,    
+                                      DOB = studentDb.DOB,  
+                                      Email = studentDb.Email,
+                                      Phone = studentDb.Phone,
+                                      PerAddress = studentDb.PermanentAddress,
+                                      CurrAddress = studentDb.CurrentAddress,
+                                      Course = courseDb.CourseName,
+                                      Stream = streamDb.StreamName,
+                                      Twelfth = studentDb.TwelfthMarks,
+                                      Tenth = studentDb.TenthMarks,
+                                      Bio = studentDb.StudentBio
+                                  };
+            return Json(studentJoinResult);
         }
 
 

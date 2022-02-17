@@ -89,56 +89,56 @@ $(document).ready(function () {
                    // dataAjax: JSON.stringify(),
                     success: function (result) {
                         console.log(result)
-                        var firstName = result.firstName
+                        var firstName = result[0].firstName
                         let ViewFirstName = document.getElementById("ViewFirstName");
                         ViewFirstName.innerHTML = firstName
 
 
-                        var lastName = result.lastName
+                        var lastName = result[0].lastName
                         let ViewLastName = document.getElementById("ViewLastName");
                         ViewLastName.innerHTML = lastName
 
-                        var gender = result.gender
+                        var gender = result[0].gender
                         let ViewGender = document.getElementById("ViewGender");
                         ViewGender.innerHTML = gender
 
-                        var dob = result.dob
+                        var dob = result[0].dob
                         let ViewDOB = document.getElementById("ViewDOB");
                         ViewDOB.innerHTML = dob
 
-                        var email = result.email
+                        var email = result[0].email
                         let ViewEmail = document.getElementById("ViewEmail");
                         ViewEmail.innerHTML = email
 
-                        var phone = result.phone
+                        var phone = result[0].phone
                         let ViewPhone = document.getElementById("ViewPhone");
                         ViewPhone.innerHTML = phone
 
-                        var PerAddress = result.permanentAddress
+                        var PerAddress = result[0].perAddress
                         let ViewPerAdd = document.getElementById("ViewPerAdd");
                         ViewPerAdd.innerHTML = PerAddress
 
-                        var CurrAddress = result.currentAddress
+                        var CurrAddress = result[0].currAddress
                         let ViewCurrAdd = document.getElementById("ViewCurrAdd");
                         ViewCurrAdd.innerHTML = CurrAddress
 
-                        var ugCourse = result.ugCourse
+                        var ugCourse = result[0].course
                         let ViewUgCourse = document.getElementById("ViewUgCourse");
                         ViewUgCourse.innerHTML = ugCourse
 
-                        var ugStream = result.stream
+                        var ugStream = result[0].stream
                         let ViewStream = document.getElementById("ViewStream");
                         ViewStream.innerHTML = ugStream
 
-                        var Twelfth = result.twelfthMarks
+                        var Twelfth = result[0].twelfth
                         let ViewTwelfth = document.getElementById("ViewTwelfth");
                         ViewTwelfth.innerHTML = Twelfth+"%"
 
-                        var Tenth = result.tenthMarks
+                        var Tenth = result[0].tenth
                         let ViewTenth = document.getElementById("ViewTenth");
                         ViewTenth.innerHTML = Tenth+"%"
 
-                        var Bio = result.studentBio
+                        var Bio = result[0].bio
                         let ViewBio = document.getElementById("ViewBio");
                         ViewBio.innerHTML = Bio
 
@@ -166,55 +166,55 @@ $(document).ready(function () {
                         let EditStdId = document.getElementById("StdId");
                         EditStdId.value = StdId
 
-                        var firstName = result.firstName
+                        var firstName = result[0].firstName
                         let EditFirstName = document.getElementById("EditFirstName");
                         EditFirstName.value = firstName
 
-                        var lastName = result.lastName
+                        var lastName = result[0].lastName
                         let EditLastName = document.getElementById("EditLastName");
                         EditLastName.value = lastName
 
-                        var gender = result.gender
+                        var gender = result[0].gender
                         const $select = document.querySelector('#EditGender');
                         $select.value = gender
 
-                        var dob = result.dob
+                        var dob = result[0].dob
                         let EditDOB = document.getElementById("EditDob");
                         EditDOB.value = dob
 
-                        var email = result.email
+                        var email = result[0].email
                         let EditEmail = document.getElementById("EditEmail");
                         EditEmail.value = email
 
-                        var phone = result.phone
+                        var phone = result[0].phone
                         let EditPhone = document.getElementById("EditPhone");
                         EditPhone.value = phone
 
-                        var PerAddress = result.permanentAddress
+                        var PerAddress = result[0].perAddress
                         let EditPerAddress = document.getElementById("EditPerAddress");
                         EditPerAddress.value = PerAddress
 
-                        var CurrAddress = result.currentAddress
+                        var CurrAddress = result[0].currAddress
                         let EditCurrAdd = document.getElementById("EditCurrAdd");
                         EditCurrAdd.value = CurrAddress
 
-                        var ugCourse = result.ugCourse
+                        var ugCourse = result[0].course
                         let EditUgCourse = document.getElementById("EditUgCourse");
                         EditUgCourse.value = ugCourse
 
-                        var ugStream = result.stream
+                        var ugStream = result[0].stream
                         let EditStream = document.getElementById("EditStream");
                         EditStream.value = ugStream
 
-                        var Twelfth = result.twelfthMarks
+                        var Twelfth = result[0].twelfth
                         let EditTwelfthMarks = document.getElementById("EditTwelfthMarks");
                         EditTwelfthMarks.value = Twelfth
 
-                        var Tenth = result.tenthMarks
+                        var Tenth = result[0].tenth
                         let EditTenthMarks = document.getElementById("EditTenthMarks");
                         EditTenthMarks.value = Tenth
 
-                        var Bio = result.studentBio
+                        var Bio = result[0].bio
                         let EditBio = document.getElementById("EditBio");
                         EditBio.innerHTML = Bio
 
@@ -223,53 +223,91 @@ $(document).ready(function () {
                     }
                 });
         })
-
-        /* Course Data Using Ajax*/
-        $(".RegisterBtn").click(function () {
-
-            $.ajax(
-                {
-                    url: `/Course/GetAllCourses/`,
-                    type: "GET",
-                    async: false,
-                    dataType: "json",
-                    contentType: "application/json;",
-                    // dataAjax: JSON.stringify(),
-                    success: function (result) {
-                        console.log(result)
-                        $.each(result, function (key, value) {
-                            $('#UgCourse')
-                                .append($('<option>', { value: value.courseId })
-                                    .text(value.courseName));
-                        });
-                        console.log("Success")
-                    }
-                },
-            );
-        })
-        $(".RegisterBtn").click(function () {
-
-            $.ajax(
-                {
-                    url: `/Stream/GetAllStream/`,
-                    type: "GET",
-                    async: false,
-                    dataType: "json",
-                    contentType: "application/json;",
-                    // dataAjax: JSON.stringify(),
-                    success: function (result) {
-                        console.log(result)
-                        $.each(result, function (key, value) {
-                            $('#Stream')
-                                .append($('<option>', { value: value.streamId })
-                                    .text(value.streamName));
-                        });
-                        console.log("Success")
-                    }
-                }
-            );
-        })
-    
     }
     )
+})
+
+$(document).ready(function () {
+/*    Courses on Registration Page*/
+        $.ajax(
+            {
+                url: `/Course/GetAllCourses/`,
+                type: "GET",
+                async: false,
+                dataType: "json",
+                contentType: "application/json;",
+                // dataAjax: JSON.stringify(),
+                success: function (result) {
+                    console.log(result)
+                    $.each(result, function (key, value) {
+                        $('#UgCourse')
+                            .append($('<option>', { value: value.courseId })
+                                .text(value.courseName));
+                    });
+                    console.log("Success")
+                }
+            },
+    );
+
+/*    Stream on Registration Page*/  
+        $.ajax(
+            {
+                url: `/Stream/GetAllStream/`,
+                type: "GET",
+                async: false,
+                dataType: "json",
+                contentType: "application/json;",
+                // dataAjax: JSON.stringify(),
+                success: function (result) {
+                    console.log(result)
+                    $.each(result, function (key, value) {
+                        $('#Stream')
+                            .append($('<option>', { value: value.streamId })
+                                .text(value.streamName));
+                    });
+                    console.log("Success")
+                }
+            }
+    );
+/*    Courses on Edit Page*/
+        $.ajax(
+            {
+                url: `/Course/GetAllCourses/`,
+                type: "GET",
+                async: false,
+                dataType: "json",
+                contentType: "application/json;",
+                // dataAjax: JSON.stringify(),
+                success: function (result) {
+                    console.log(result)
+                    $.each(result, function (key, value) {
+                        $('#EditUgCourse')
+                            .append($('<option>', { value: value.courseId })
+                                .text(value.courseName));
+                    });
+                    console.log("Success")
+                }
+            },
+    );
+/*    Stream on Edit Page*/
+        $.ajax(
+            {
+                url: `/Stream/GetAllStream/`,
+                type: "GET",
+                async: false,
+                dataType: "json",
+                contentType: "application/json;",
+                // dataAjax: JSON.stringify(),
+                success: function (result) {
+                    console.log(result)
+                    $.each(result, function (key, value) {
+                        $('#EditStream')
+                            .append($('<option>', { value: value.streamId })
+                                .text(value.streamName));
+                    });
+                }
+            }
+    );
+    console.log("Success")
+
 })

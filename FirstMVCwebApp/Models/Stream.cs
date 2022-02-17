@@ -8,6 +8,8 @@ namespace FirstMVCwebApp.Models
         public int StreamId { get; set; }
         [Required]
         public string StreamName { get; set; }
+        
+        //Foreign key for Stream Defined in Form DB
         public ICollection<Form> FormData { get; set; }
 
     }
