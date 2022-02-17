@@ -2,12 +2,15 @@
 
 namespace FirstMVCwebApp.Models
 {
-    public class Courses
+    public class Course
     {
         [Key]
         public int CourseId { get; set; }
         [Required]
         public string CourseName { get; set; }
-        
+
+        public ICollection<Form> FormData { get; set; }
+
+
     }
 }

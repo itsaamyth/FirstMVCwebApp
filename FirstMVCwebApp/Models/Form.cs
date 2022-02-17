@@ -18,16 +18,18 @@ namespace FirstMVCwebApp.Models
         [Required]
         public string Email { get; set; }
         [Required]
-        public int Phone { get; set; }
+        public string Phone { get; set; }
         [Required]
         public string PermanentAddress { get; set; }
         [Required]
         public string CurrentAddress { get; set; }
-        /*        [Required]
-                public string UgCourse { get; set; }*/
-/*        Foreign Key Method*/
-        public virtual Courses Courses { get; set; }
-        public virtual Stream Stream{ get; set; }
+
+        //Foreign key for Course & Stream
+        public int CourseId { get; set; }
+        public Course Course { get; set; }
+        public int StreamId { get; set; }
+        public Stream Stream { get; set; }
+
         [Required]
         public int TwelfthMarks { get; set; }
         [Required]

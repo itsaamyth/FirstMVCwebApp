@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FirstMVCwebApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220216054054_AddStudentToDb")]
-    partial class AddStudentToDb
+    [Migration("20220217055550_StudentRegistrationDB")]
+    partial class StudentRegistrationDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,7 +47,7 @@ namespace FirstMVCwebApp.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("FirstMVCwebApp.Models.Courses", b =>
+            modelBuilder.Entity("FirstMVCwebApp.Models.Course", b =>
                 {
                     b.Property<int>("CourseId")
                         .ValueGeneratedOnAdd()
@@ -61,7 +61,7 @@ namespace FirstMVCwebApp.Migrations
 
                     b.HasKey("CourseId");
 
-                    b.ToTable("Courses");
+                    b.ToTable("Course");
                 });
 
             modelBuilder.Entity("FirstMVCwebApp.Models.Form", b =>
@@ -72,7 +72,7 @@ namespace FirstMVCwebApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CoursesCourseId")
+                    b.Property<int>("CourseId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDateTime")
@@ -106,8 +106,9 @@ namespace FirstMVCwebApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Phone")
-                        .HasColumnType("int");
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("StreamId")
                         .HasColumnType("int");
@@ -124,7 +125,7 @@ namespace FirstMVCwebApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CoursesCourseId");
+                    b.HasIndex("CourseId");
 
                     b.HasIndex("StreamId");
 
@@ -179,26 +180,36 @@ namespace FirstMVCwebApp.Migrations
 
                     b.HasKey("StreamId");
 
-                    b.ToTable("Streams");
+                    b.ToTable("Stream");
                 });
 
             modelBuilder.Entity("FirstMVCwebApp.Models.Form", b =>
                 {
-                    b.HasOne("FirstMVCwebApp.Models.Courses", "Courses")
-                        .WithMany()
-                        .HasForeignKey("CoursesCourseId")
+                    b.HasOne("FirstMVCwebApp.Models.Course", "Course")
+                        .WithMany("FormData")
+                        .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("FirstMVCwebApp.Models.Stream", "Stream")
-                        .WithMany()
+                        .WithMany("FormData")
                         .HasForeignKey("StreamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Courses");
+                    b.Navigation("Course");
 
                     b.Navigation("Stream");
+                });
+
+            modelBuilder.Entity("FirstMVCwebApp.Models.Course", b =>
+                {
+                    b.Navigation("FormData");
+                });
+
+            modelBuilder.Entity("FirstMVCwebApp.Models.Stream", b =>
+                {
+                    b.Navigation("FormData");
                 });
 #pragma warning restore 612, 618
         }

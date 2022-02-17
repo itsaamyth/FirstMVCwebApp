@@ -15,7 +15,7 @@ namespace FirstMVCwebApp.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Courses> objCoursesList = _db.Courses;
+            IEnumerable<Course> objCoursesList = _db.Course;
             return View(objCoursesList);
         }
 
@@ -29,9 +29,9 @@ namespace FirstMVCwebApp.Controllers
 
         //POST
         [HttpPost]
-        public IActionResult AddCourse(Courses obj)
+        public IActionResult AddCourse(Course obj)
         {
-                _db.Courses.Add(obj);
+                _db.Course.Add(obj);
                 _db.SaveChanges();
                 TempData["success"] = "Course Addesd Successfully";
                 return RedirectToAction("Index");
@@ -39,7 +39,7 @@ namespace FirstMVCwebApp.Controllers
 
         public JsonResult GetAllCourses()
         {
-            var obj = _db.Courses.ToList();
+            var obj = _db.Course.ToList();
             /*            if (obj == null)
                        {
                             return NotFound();

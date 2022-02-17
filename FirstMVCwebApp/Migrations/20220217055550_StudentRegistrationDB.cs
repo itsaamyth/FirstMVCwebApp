@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FirstMVCwebApp.Migrations
 {
-    public partial class AddStudentToDb : Migration
+    public partial class StudentRegistrationDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Courses",
+                name: "Course",
                 columns: table => new
                 {
                     CourseId = table.Column<int>(type: "int", nullable: false)
@@ -19,11 +19,11 @@ namespace FirstMVCwebApp.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Courses", x => x.CourseId);
+                    table.PrimaryKey("PK_Course", x => x.CourseId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Streams",
+                name: "Stream",
                 columns: table => new
                 {
                     StreamId = table.Column<int>(type: "int", nullable: false)
@@ -32,7 +32,7 @@ namespace FirstMVCwebApp.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Streams", x => x.StreamId);
+                    table.PrimaryKey("PK_Stream", x => x.StreamId);
                 });
 
             migrationBuilder.CreateTable(
@@ -46,10 +46,10 @@ namespace FirstMVCwebApp.Migrations
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DOB = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Phone = table.Column<int>(type: "int", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PermanentAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CurrentAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CoursesCourseId = table.Column<int>(type: "int", nullable: false),
+                    CourseId = table.Column<int>(type: "int", nullable: false),
                     StreamId = table.Column<int>(type: "int", nullable: false),
                     TwelfthMarks = table.Column<int>(type: "int", nullable: false),
                     TenthMarks = table.Column<int>(type: "int", nullable: false),
@@ -60,23 +60,23 @@ namespace FirstMVCwebApp.Migrations
                 {
                     table.PrimaryKey("PK_FormData", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_FormData_Courses_CoursesCourseId",
-                        column: x => x.CoursesCourseId,
-                        principalTable: "Courses",
+                        name: "FK_FormData_Course_CourseId",
+                        column: x => x.CourseId,
+                        principalTable: "Course",
                         principalColumn: "CourseId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_FormData_Streams_StreamId",
+                        name: "FK_FormData_Stream_StreamId",
                         column: x => x.StreamId,
-                        principalTable: "Streams",
+                        principalTable: "Stream",
                         principalColumn: "StreamId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_FormData_CoursesCourseId",
+                name: "IX_FormData_CourseId",
                 table: "FormData",
-                column: "CoursesCourseId");
+                column: "CourseId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_FormData_StreamId",
@@ -90,10 +90,10 @@ namespace FirstMVCwebApp.Migrations
                 name: "FormData");
 
             migrationBuilder.DropTable(
-                name: "Courses");
+                name: "Course");
 
             migrationBuilder.DropTable(
-                name: "Streams");
+                name: "Stream");
         }
     }
 }

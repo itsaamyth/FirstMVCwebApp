@@ -8,5 +8,7 @@ namespace FirstMVCwebApp.Models
         public int StreamId { get; set; }
         [Required]
         public string StreamName { get; set; }
+        public ICollection<Form> FormData { get; set; }
+
     }
 }

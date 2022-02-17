@@ -15,7 +15,7 @@ namespace FirstMVCwebApp.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Models.Stream> objCoursesList = _db.Streams;
+            IEnumerable<Models.Stream> objCoursesList = _db.Stream;
             return View(objCoursesList);
         }
 
@@ -31,14 +31,14 @@ namespace FirstMVCwebApp.Controllers
         [HttpPost]
         public IActionResult AddStream(Models.Stream obj)
         {
-                _db.Streams.Add(obj);
+                _db.Stream.Add(obj);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
         }
 
         public JsonResult GetAllStream()
         {
-            var obj = _db.Streams.ToList();
+            var obj = _db.Stream.ToList();
             /*            if (obj == null)
                        {
                             return NotFound();
