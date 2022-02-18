@@ -15,4 +15,21 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-color : #f2f3f4
+}
+
+td{
+    font-size:16px;
+}
+th{
+    font-weight:bold;
+}
+input{
+    border-color:#3459e6 !important;
+}
+select {
+    border-color: #3459e6 !important;
+}
+textarea {
+    border-color: #3459e6 !important;
 }

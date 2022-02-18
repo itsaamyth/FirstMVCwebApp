@@ -40,6 +40,27 @@ function EditAddressInput() {
     }
 }
 
+/*function changeProfileImg() {
+    let editProfileImgBtm = document.getElementById("editProfileImgBtn")
+    let editProfileImg = document.getElementById("editProfileImg")
+    let editImageUpload = document.getElementById("editImageUpload")
+
+    $("#editImageUpload").hide()
+}*/
+
+$(document).ready(function () {
+    $("#editImageUpload").hide()
+    $("#editProfileImgBtn").click(function () {
+        $("#editImageUpload").show();
+        $("#editProfileImg").hide();
+        $("#editProfileImgBtn").hide();
+
+
+
+    })
+
+})
+
 $(document).ready(function () {
     $(function () {
   /*        Edit Function Using Html&Js */
@@ -166,6 +187,9 @@ $(document).ready(function () {
                     // dataAjax: JSON.stringify(),
                     success: function (result) {
                         console.log(result)
+
+                        var profileImg = result[0].profileImg
+                        $("#editProfileImg").attr("src", profileImg)
 
                         let EditStdId = document.getElementById("StdId");
                         EditStdId.value = StdId

@@ -1,13 +1,15 @@
 ﻿@model IEnumerable<Form>
+@*
+    <ol class="breadcrumb">
+  <li class="breadcrumb-item active">Home</li>
+</ol>*@
 
-
-<h1>Index Form</h1>
 
 <div class="container p-3">
     <div class="row pt-4">
         <div class="col-6">
-            <h2 class="text-primary">Form Data</h2>
-        </div>
+            <h2>Student Form Data</h2>
+        </div><br/><br/><br/>
         <div class="col-6 text-end">
             <button type="button"  data-bs-toggle="modal" data-bs-target="#RegisterFormModal" class="btn btn-primary RegisterBtn">
                 <i class="bi bi-plus-circle"></i> Fill New Form
@@ -15,9 +17,7 @@
         </div>
     </div>
 
-    <br/><br/>
-
-<table class="table table-bordered table-striped" style="width:100%">
+<table class="table table-bordered table-striped table-hover" style="width:100%">
         <thead>
         <tr>
             <th>
@@ -41,6 +41,10 @@
                         <th>
                 DOB 
             </th>
+                                    <th>
+                Edit 
+            </th>
+
         </tr>
     </thead>
     <tbody>
@@ -95,19 +99,22 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Registration Form</h5>
+              <hr />
       </div>
       <div class="modal-body">
           <form method="post" asp-action="FillForm" enctype="multipart/form-data">
 
-              <div>
+<div>
     <h3> Profile Picture </h3>
     <br/>
 <div class="row">
     <div class="col">
-      <input name="ProfileImageLocal" type="file" class="form-control">
+      <input name="ProfileImageLocal" type="file" class="form-control btn-primary">
     </div>
   </div>
-  </div>
+ </div>
+              <hr />
+
   <br/>
 <div>
     <h3> Primary Details </h3>
@@ -119,7 +126,7 @@
     </div>
     <div class="col">
         <label>Last Name:</label>
-      <input name="LastName" type="text" class="form-control" >
+      <input name="LastName" type="text" class="form-control " >
     </div>
   </div>
    <br/>
@@ -138,6 +145,8 @@
     </div>
   </div>
   </div>
+              <hr />
+
   <br/>
   <div>
     <h3> Contact Details </h3>
@@ -152,6 +161,7 @@
     </div>
   </div>
 </div>
+              <hr />
 
 <br />
 
@@ -172,6 +182,8 @@
     </div>
   </div>
 </div>
+              <hr />
+
 <br />
   <div>
     <h3> Educational Details </h3>
@@ -219,7 +231,7 @@
 </div>
 <br />
   <div>
-    <h3> Tell Us About Urself</h3>
+    <h3> Tell Us About Yourself</h3>
 <div class="row">
     <div class="col">
       <textarea name="StudentBio" class="form-control" rows="5" placeholder="Student Bio"></textarea>
@@ -249,7 +261,23 @@
         <h5 class="modal-title" id="exampleModalLabel">Edit Form</h5>
       </div>
       <div class="modal-body">
-          <form method="post" asp-action="EditForm">
+          <form method="post" asp-action="EditForm" enctype="multipart/form-data">
+
+<div>
+    <h4> Profile Picture </h4>
+<div class="row">
+    <div class="col">
+        <img class="img-thumbnail" id="editProfileImg" style="height:200px;width:200px;padding:unset"/>
+        <input name="ProfileImageLocal" id="editImageUpload" type="file" class="form-control">
+    </div>
+    <div class="col">
+       <button type="button" style="padding:8px 9px" id="editProfileImgBtn" onclick="changeProfileImg()" class="btn btn-primary mx-2">  
+                        <i class="bi bi-pencil-square"></i>Edit Profile Picture
+       </button>
+    </div>
+  </div>
+  </div>
+  <br/>
 <div>
     <h3> Primary Details </h3>
 <div class="row">
@@ -381,7 +409,7 @@
     <h4> Profile Picture </h4>
 <div class="row">
     <div class="col">
-        <img class="img-thumbnail" id="profileImg" style="height:200px;width:200px"/>
+        <img class="img-thumbnail" id="profileImg" style="height:200px;width:200px;padding:unset"/>
     </div>
   </div>
   </div>
@@ -399,7 +427,6 @@
         <h4 id="ViewLastName"></h4>
     </div>
   </div>
-   <br/>
   <div class="row">
     <div class="col">
         <label>Gender:</label>

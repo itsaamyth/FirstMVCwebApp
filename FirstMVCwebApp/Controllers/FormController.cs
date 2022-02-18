@@ -44,8 +44,17 @@ namespace FirstMVCwebApp.Controllers
 
         //PUT
         [HttpPost]
-        public IActionResult EditForm(Form obj)
+        public async Task<IActionResult> EditFormAsync(Form obj)
         {
+            if (obj.ProfileImageLocal != null)
+            {
+
+                string folder = "Profile/Pictures/";
+                folder += Guid.NewGuid().ToString() + obj.ProfileImageLocal.FileName;
+                string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
+                obj.ProfileImagePath = folder;
+                await obj.ProfileImageLocal.CopyToAsync(new FileStream(serverFolder, FileMode.Create)); ;
+            }
             _db.FormData.Update(obj);
             _db.SaveChanges();
             return RedirectToAction("Index");
