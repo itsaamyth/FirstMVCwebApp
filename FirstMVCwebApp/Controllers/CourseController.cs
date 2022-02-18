@@ -40,10 +40,10 @@ namespace FirstMVCwebApp.Controllers
         public JsonResult GetAllCourses()
         {
             var obj = _db.Course.ToList();
-            /*            if (obj == null)
-                       {
-                            return NotFound();
-                        }*/
+/*            if (obj == null)
+            {
+                return NotFound();
+            }*/
 
             return Json(obj);
         }

@@ -89,6 +89,10 @@ $(document).ready(function () {
                    // dataAjax: JSON.stringify(),
                     success: function (result) {
                         console.log(result)
+
+                        var profileImg = result[0].profileImg
+                        $("#profileImg").attr("src", profileImg)
+
                         var firstName = result[0].firstName
                         let ViewFirstName = document.getElementById("ViewFirstName");
                         ViewFirstName.innerHTML = firstName

@@ -39,10 +39,10 @@ namespace FirstMVCwebApp.Controllers
         public JsonResult GetAllStream()
         {
             var obj = _db.Stream.ToList();
-            /*            if (obj == null)
-                       {
-                            return NotFound();
-                        }*/
+/*            if (obj == null)
+            {
+                return NotFound();
+            }*/
 
             return Json(obj);
         }

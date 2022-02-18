@@ -1,16 +1,21 @@
 ﻿using FirstMVCwebApp.Data;
 using FirstMVCwebApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
 
 namespace FirstMVCwebApp.Controllers
 {
     public class FormController : Controller
     {
         private readonly ApplicationDbContext _db;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public FormController(ApplicationDbContext db)
+
+        public FormController(ApplicationDbContext db,IWebHostEnvironment webHostEnvironment)
         {
             _db = db;
+            _webHostEnvironment = webHostEnvironment;
+
         }
         //GET
         [HttpGet]
@@ -22,8 +27,16 @@ namespace FirstMVCwebApp.Controllers
 
         //POST
         [HttpPost]
-        public IActionResult FillForm(Form obj)
+        public async Task<IActionResult> FillFormAsync(Form obj)
         {
+            if(obj.ProfileImageLocal != null)
+            {
+                string folder = "Profile/Pictures/";
+                folder += Guid.NewGuid().ToString()+obj.ProfileImageLocal.FileName;
+                string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath,folder);
+                obj.ProfileImagePath = folder;
+                await obj.ProfileImageLocal.CopyToAsync(new FileStream(serverFolder,FileMode.Create)); ;
+            }
             _db.FormData.Add(obj);
             _db.SaveChanges();
             return RedirectToAction("Index");
@@ -64,6 +77,7 @@ namespace FirstMVCwebApp.Controllers
                                   where studentDb.Id == Id        
                                   select new
                                   { // result selector 
+                                      ProfileImg = studentDb.ProfileImagePath,
                                       FirstName = studentDb.FirstName,
                                       LastName = studentDb.LastName,
                                       Gender = studentDb.Gender,    

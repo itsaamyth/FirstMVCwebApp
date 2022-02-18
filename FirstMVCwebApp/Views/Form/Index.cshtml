@@ -97,9 +97,21 @@
         <h5 class="modal-title" id="exampleModalLabel">Registration Form</h5>
       </div>
       <div class="modal-body">
-          <form method="post" asp-action="FillForm">
+          <form method="post" asp-action="FillForm" enctype="multipart/form-data">
+
+              <div>
+    <h3> Profile Picture </h3>
+    <br/>
+<div class="row">
+    <div class="col">
+      <input name="ProfileImageLocal" type="file" class="form-control">
+    </div>
+  </div>
+  </div>
+  <br/>
 <div>
     <h3> Primary Details </h3>
+
 <div class="row">
     <div class="col">
         <label>First Name:</label>
@@ -365,6 +377,15 @@
         <h5 class="modal-title" id="ViewModalLabel">View Data</h5>
       </div>
       <div class="modal-body">
+                        <div>
+    <h4> Profile Picture </h4>
+<div class="row">
+    <div class="col">
+        <img class="img-thumbnail" id="profileImg" style="height:200px;width:200px"/>
+    </div>
+  </div>
+  </div>
+  <br/>
 <div>
     <h4> Primary Details </h4>
 <div class="row">

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FirstMVCwebApp.Models
 {
@@ -29,6 +30,13 @@ namespace FirstMVCwebApp.Models
         public Course Course { get; set; }
         public int StreamId { get; set; }
         public Stream Stream { get; set; }
+
+        //Profile Image Path in DB
+        [NotMapped]
+        public IFormFile ProfileImageLocal { get; set; }
+
+        public string ProfileImagePath { get; set; }
+
 
         [Required]
         public int TwelfthMarks { get; set; }
