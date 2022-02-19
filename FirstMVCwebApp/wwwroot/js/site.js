@@ -112,6 +112,9 @@ $(document).ready(function () {
                         console.log(result)
 
                         var profileImg = result[0].profileImg
+                        if (profileImg == '') {
+                            profileImg = "https://img.icons8.com/color/96/000000/gender-neutral-user.png"
+                        }
                         $("#profileImg").attr("src", profileImg)
 
                         var firstName = result[0].firstName
@@ -188,11 +191,17 @@ $(document).ready(function () {
                     success: function (result) {
                         console.log(result)
 
-                        var profileImg = result[0].profileImg
-                        $("#editProfileImg").attr("src", profileImg)
+                        var EditProfileImg = result[0].profileImg
+                        if (EditProfileImg == '') {
+                            EditProfileImg = "https://img.icons8.com/color/96/000000/gender-neutral-user.png"
+                        }
+                        $("#editProfileImg").attr("src", EditProfileImg)
 
                         let EditStdId = document.getElementById("StdId");
                         EditStdId.value = StdId
+
+                        let imgDummyPath = document.getElementById("imgDummyPath");
+                        imgDummyPath.value = EditProfileImg
 
                         var firstName = result[0].firstName
                         let EditFirstName = document.getElementById("EditFirstName");
@@ -203,8 +212,10 @@ $(document).ready(function () {
                         EditLastName.value = lastName
 
                         var gender = result[0].gender
-                        const $select = document.querySelector('#EditGender');
-                        $select.value = gender
+/*                        const $select = document.querySelector('#EditGender');
+                        $select.value = gender*/
+                        let EditGender = document.getElementById("EditGender")
+                        EditGender.value = gender
 
                         var dob = result[0].dob
                         let EditDOB = document.getElementById("EditDob");
@@ -226,11 +237,11 @@ $(document).ready(function () {
                         let EditCurrAdd = document.getElementById("EditCurrAdd");
                         EditCurrAdd.value = CurrAddress
 
-                        var ugCourse = result[0].course
+                        var ugCourse = result[0].courseId
                         let EditUgCourse = document.getElementById("EditUgCourse");
                         EditUgCourse.value = ugCourse
 
-                        var ugStream = result[0].stream
+                        var ugStream = result[0].streamId
                         let EditStream = document.getElementById("EditStream");
                         EditStream.value = ugStream
 
@@ -266,13 +277,11 @@ $(document).ready(function () {
                 contentType: "application/json;",
                 // dataAjax: JSON.stringify(),
                 success: function (result) {
-                    console.log(result)
                     $.each(result, function (key, value) {
                         $('#UgCourse')
                             .append($('<option>', { value: value.courseId })
                                 .text(value.courseName));
                     });
-                    console.log("Success")
                 }
             },
     );
@@ -287,13 +296,11 @@ $(document).ready(function () {
                 contentType: "application/json;",
                 // dataAjax: JSON.stringify(),
                 success: function (result) {
-                    console.log(result)
                     $.each(result, function (key, value) {
                         $('#Stream')
                             .append($('<option>', { value: value.streamId })
                                 .text(value.streamName));
                     });
-                    console.log("Success")
                 }
             }
     );
@@ -307,13 +314,11 @@ $(document).ready(function () {
                 contentType: "application/json;",
                 // dataAjax: JSON.stringify(),
                 success: function (result) {
-                    console.log(result)
                     $.each(result, function (key, value) {
                         $('#EditUgCourse')
                             .append($('<option>', { value: value.courseId })
                                 .text(value.courseName));
                     });
-                    console.log("Success")
                 }
             },
     );
@@ -327,7 +332,6 @@ $(document).ready(function () {
                 contentType: "application/json;",
                 // dataAjax: JSON.stringify(),
                 success: function (result) {
-                    console.log(result)
                     $.each(result, function (key, value) {
                         $('#EditStream')
                             .append($('<option>', { value: value.streamId })
@@ -336,6 +340,6 @@ $(document).ready(function () {
                 }
             }
     );
-    console.log("Success")
+
 
 })

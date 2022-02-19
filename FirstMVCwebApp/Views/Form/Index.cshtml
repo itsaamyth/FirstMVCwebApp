@@ -17,7 +17,7 @@
         </div>
     </div>
 
-<table class="table table-bordered table-striped table-hover" style="width:100%">
+<table class="table table-bordered table-striped table-hover table-responsive" style="width:100%">
         <thead>
         <tr>
             <th>
@@ -97,19 +97,21 @@
 <div class="modal fade" id="RegisterFormModal" tabindex="-1" aria-labelledby="RegisterFormModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Registration Form</h5>
-              <hr />
-      </div>
+@*      <div class="modal-header" style="background-color:#e7eaed">
+        <h3 class="modal-title"> <img src="~/css/idcard.png" style="height:50px;width:50px"/> Student Registration Form</h3>
+      </div>*@
       <div class="modal-body">
+        <h2 class="modal-title" style="text-align:center"> <img src="~/css/idcard.png" style="height:50px;width:50px"/> Student Registration Form</h2>
+              <hr />
+        <br />
+
           <form method="post" asp-action="FillForm" enctype="multipart/form-data">
 
 <div>
-    <h3> Profile Picture </h3>
-    <br/>
+    <h4> Profile Picture </h4>
 <div class="row">
     <div class="col">
-      <input name="ProfileImageLocal" type="file" class="form-control btn-primary">
+      <input name="ProfileImageLocal" style="color:white !important" type="file" class="form-control btn-primary">
     </div>
   </div>
  </div>
@@ -117,7 +119,7 @@
 
   <br/>
 <div>
-    <h3> Primary Details </h3>
+    <h4> Primary Details </h4>
 
 <div class="row">
     <div class="col">
@@ -149,7 +151,7 @@
 
   <br/>
   <div>
-    <h3> Contact Details </h3>
+    <h4> Contact Details </h4>
 <div class="row">
     <div class="col">
         <label >Email:</label>
@@ -166,7 +168,7 @@
 <br />
 
   <div>
-    <h3> Address Details </h3>
+    <h4> Address Details </h4>
 <div class="row">
     <div class="col">
         <label>Permanent Address</label>
@@ -186,7 +188,7 @@
 
 <br />
   <div>
-    <h3> Educational Details </h3>
+    <h4> Educational Details </h4>
 <div class="row">
     <div class="col">
         <label >Undergraduate Course</label>
@@ -215,7 +217,7 @@
 </select>
     </div>
   </div>
-
+  <br />
   <div class="row">
     <div class="col">
         <label>12th Percentage</label>
@@ -229,9 +231,10 @@
     </div>
   </div>
 </div>
+<hr />
 <br />
   <div>
-    <h3> Tell Us About Yourself</h3>
+    <h4> Tell Us About Yourself</h4>
 <div class="row">
     <div class="col">
       <textarea name="StudentBio" class="form-control" rows="5" placeholder="Student Bio"></textarea>
@@ -240,7 +243,7 @@
 </div>
       <div class="modal-footer">
         <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Reset</button>
-        <button type="submit" class="btn btn-primary">Save changes</button>
+        <button type="submit" class="btn btn-primary">Save Details</button>
       </div>
 </form>
       </div>
@@ -257,29 +260,32 @@
 <div class="modal fade" id="EditFormModal" tabindex="-1" aria-labelledby="EditFormModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit Form</h5>
-      </div>
       <div class="modal-body">
+                  <h2 class="modal-title" style="text-align:center"> <img src="~/css/idcard.png" style="height:50px;width:50px"/> Student Registration Form</h2>
+              <hr />
           <form method="post" asp-action="EditForm" enctype="multipart/form-data">
 
 <div>
     <h4> Profile Picture </h4>
+               <input name="imgDummyPath" id="imgDummyPath" type="text" hidden/>
 <div class="row">
-    <div class="col">
+    <div class="col-md-5">
         <img class="img-thumbnail" id="editProfileImg" style="height:200px;width:200px;padding:unset"/>
-        <input name="ProfileImageLocal" id="editImageUpload" type="file" class="form-control">
     </div>
-    <div class="col">
+    <div class="col-md-7">
        <button type="button" style="padding:8px 9px" id="editProfileImgBtn" onclick="changeProfileImg()" class="btn btn-primary mx-2">  
                         <i class="bi bi-pencil-square"></i>Edit Profile Picture
        </button>
     </div>
+        <div class="col-md-12">
+                <input name="ProfileImageLocal" id="editImageUpload" style="color:white !important" type="file" class="form-control btn-primary">
+    </div>
   </div>
   </div>
+  <hr />
   <br/>
 <div>
-    <h3> Primary Details </h3>
+    <h4> Primary Details </h4>
 <div class="row">
     <input name="Id" id="StdId" type="text" hidden/>
     <div class="col">
@@ -307,9 +313,10 @@
     </div>
   </div>
   </div>
+  <hr />
   <br/>
   <div>
-    <h3> Contact Details </h3>
+    <h4> Contact Details </h4>
 <div class="row">
     <div class="col">
         <label >Email:</label>
@@ -322,10 +329,11 @@
   </div>
 </div>
 
-<br />
+  <hr />
+  <br/>
 
   <div>
-    <h3> Address Details </h3>
+    <h4> Address Details </h4>
 <div class="row">
     <div class="col">
         <label>Permanent Address</label>
@@ -341,9 +349,10 @@
     </div>
   </div>
 </div>
-<br />
+  <hr />
+  <br/>
   <div>
-    <h3> Educational Details </h3>
+    <h4> Educational Details </h4>
 <div class="row">
     <div class="col">
         <label >Undergraduate Course</label>
@@ -374,9 +383,10 @@
     </div>
   </div>
 </div>
-<br />
+  <hr />
+  <br/>
   <div>
-    <h3> Tell Us About Yourself</h3>
+    <h4> Tell Us About Yourself</h4>
 <div class="row">
     <div class="col">
       <textarea name="StudentBio" id="EditBio" class="form-control" rows="5" placeholder="Student Bio"></textarea>
@@ -389,10 +399,6 @@
       </div>
 </form>
       </div>
-@*      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>*@
     </div>
   </div>
 </div>
@@ -401,54 +407,57 @@
 <div class="modal fade" id="ViewFormModal" tabindex="-1" aria-labelledby="ViewFormModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <div class="modal-header">
+@*      <div class="modal-header">
         <h5 class="modal-title" id="ViewModalLabel">View Data</h5>
-      </div>
+      </div>*@
       <div class="modal-body">
                         <div>
-    <h4> Profile Picture </h4>
 <div class="row">
-    <div class="col">
-        <img class="img-thumbnail" id="profileImg" style="height:200px;width:200px;padding:unset"/>
+    <div class="col-md-5">
+        <img class="img-thumbnail" id="profileImg" style="height:230px;width:250px;padding:unset"/>
     </div>
-  </div>
-  </div>
-  <br/>
-<div>
-    <h4> Primary Details </h4>
+    <div class="col-md-7">
+        <div>
+    <h4 style="font-weight:500"> Primary Details </h4>
+    <hr />
 <div class="row">
     <input name="Id" id="StdId" type="text" hidden/>
     <div class="col">
         <label>First Name:</label>
-        <h4 id="ViewFirstName"></h4>
+        <h5 id="ViewFirstName"></h5>
     </div>
     <div class="col">
         <label id="ViewFirstName">Last Name:</label>
-        <h4 id="ViewLastName"></h4>
+        <h5 id="ViewLastName"></h5>
     </div>
   </div>
   <div class="row">
     <div class="col">
         <label>Gender:</label>
-        <h4 id="ViewGender"></h4>
+        <h5 id="ViewGender"></h5>
     </div>
     <div class="col">
         <label>Date of Birth:</label>
-        <h4 id="ViewDOB"></h4>
+        <h5 id="ViewDOB"></h5>
+    </div>
+  </div>
+  </div>
     </div>
   </div>
   </div>
   <br/>
   <div>
-    <h4> Contact Details </h4>
+ <h4 style="font-weight:500"> Contact Details </h4>
+    <hr />
+
 <div class="row">
     <div class="col">
         <label >Email:</label>
-        <h4 id="ViewEmail"></h4>
+        <h5 id="ViewEmail"></h5>
     </div>
     <div class="col">
         <label >Phone:</label>
-        <h4 id="ViewPhone"></h4>
+        <h5 id="ViewPhone"></h5>
     </div>
   </div>
 </div>
@@ -456,33 +465,35 @@
 <br />
 
   <div>
-    <h4> Address Details </h4>
+<h4 style="font-weight:500"> Address Details </h4>
+    <hr />
 <div class="row">
     <div class="col">
         <label>Permanent Address:</label>
         <br/>
-        <h4 id="ViewPerAdd"></h4>
+        <h5 id="ViewPerAdd"></h5>
     </div>
     <div class="col">
         <label>Current Address:</label>
                 <br/>
-        <h4 id="ViewCurrAdd"></h4>
+        <h5 id="ViewCurrAdd"></h5>
     </div>
   </div>
 </div>
 <br />
   <div>
-    <h4> Educational Details </h4>
+<h4 style="font-weight:500"> Educational Details </h4>
+    <hr />
 <div class="row">
     <div class="col">
         <label >Undergraduate Course:</label>
         <br/>
-        <h4 id="ViewUgCourse"></h4>
+        <h5 id="ViewUgCourse"></h5>
     </div>
     <div class="col">
         <label>Stream:</label>
         <br/>
-        <h4 id="ViewStream"></h4>
+        <h5 id="ViewStream"></h5>
     </div>
   </div>
 
@@ -490,27 +501,28 @@
     <div class="col">
         <label>12th Percentage:</label>
         <br/>
-        <h4 id="ViewTwelfth"></h4>
+        <h5 id="ViewTwelfth"></h5>
     </div>
     <div class="col">
         <label>10th Percentage:</label>
         <br/>
-        <h4 id="ViewTenth"></h4>
+        <h5 id="ViewTenth"></h5>
     </div>
   </div>
 </div>
 <br />
   <div>
-    <h4> Tell Us About Yourself :</h4>
+<h4 style="font-weight:500">About </h4>
+    <hr />
 <div class="row">
     <div class="col">
-        <h5 id="ViewBio"></h5>
+        <h5 style="font-weight:300" id="ViewBio"></h5>
     </div>
   </div>
 </div>
+
       <div class="modal-footer">
         <button type="reset" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
-@*        <button type="button" data-bs-toggle="modal" data-bs-target="#EditFormModal" class="btn btn-primary">Edit Data</button>*@
       </div>
       </div>
 @*      <div class="modal-footer">

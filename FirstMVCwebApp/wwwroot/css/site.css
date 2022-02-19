@@ -25,11 +25,45 @@ th{
     font-weight:bold;
 }
 input{
+    color:black;
+}
+input:hover{
     border-color:#3459e6 !important;
 }
-select {
+select:hover{
     border-color: #3459e6 !important;
 }
-textarea {
+textarea:hover{
     border-color: #3459e6 !important;
+}
+option:hover{
+    background-color: #3459e6 !important;
+}
+.modal{
+    border-top:2px solid #3459e6
+}
+.modal-content {
+    border-top: 4px solid #3459e6;
+    border-radius: 10px 50px 15px 15px;
+}
+.modal-footer{
+    background-color:unset;
+}
+    h5 {
+        font-weight: 300 !important
+    }
+input{
+    font-weight:500 !important;
+    color:black !important;
+    font-size:15px !important;
+}
+select {
+    font-weight: 500 !important;
+    color: black !important;
+    font-size: 15px !important;
+}
+textarea {
+    font-weight: 500 !important;
+    color: black !important;
+    font-size: 15px !important;
 }

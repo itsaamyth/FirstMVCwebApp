@@ -55,6 +55,9 @@ namespace FirstMVCwebApp.Controllers
                 obj.ProfileImagePath = folder;
                 await obj.ProfileImageLocal.CopyToAsync(new FileStream(serverFolder, FileMode.Create)); ;
             }
+            else {
+                obj.ProfileImagePath = obj.imgDummyPath;
+            }
             _db.FormData.Update(obj);
             _db.SaveChanges();
             return RedirectToAction("Index");
@@ -96,7 +99,9 @@ namespace FirstMVCwebApp.Controllers
                                       PerAddress = studentDb.PermanentAddress,
                                       CurrAddress = studentDb.CurrentAddress,
                                       Course = courseDb.CourseName,
+                                      courseId = courseDb.CourseId,
                                       Stream = streamDb.StreamName,
+                                      streamId = streamDb.StreamId,
                                       Twelfth = studentDb.TwelfthMarks,
                                       Tenth = studentDb.TenthMarks,
                                       Bio = studentDb.StudentBio

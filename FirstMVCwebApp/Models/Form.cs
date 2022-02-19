@@ -35,6 +35,9 @@ namespace FirstMVCwebApp.Models
         [NotMapped]
         public IFormFile ProfileImageLocal { get; set; }
 
+        [NotMapped]
+        public string imgDummyPath { get; set; }
+
         public string ProfileImagePath { get; set; }
 
 
