@@ -50,6 +50,7 @@ namespace FirstMVCwebApp.Controllers
             {
 
                 string folder = "Profile/Pictures/";
+/*                Guid.NewGuid().ToString() Used to Generate random numbers along with String*/
                 folder += Guid.NewGuid().ToString() + obj.ProfileImageLocal.FileName;
                 string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
                 obj.ProfileImagePath = folder;

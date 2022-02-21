@@ -13,6 +13,7 @@ namespace FirstMVCwebApp.Controllers
             _db = db;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             IEnumerable<Course> objCoursesList = _db.Course;
@@ -31,23 +32,41 @@ namespace FirstMVCwebApp.Controllers
         [HttpPost]
         public IActionResult AddCourse(Course obj)
         {
-                _db.Course.Add(obj);
-                _db.SaveChanges();
-                TempData["success"] = "Course Addesd Successfully";
-                return RedirectToAction("Index");
+            _db.Course.Add(obj);
+            _db.SaveChanges();
+            TempData["success"] = "Course Addesd Successfully";
+            return RedirectToAction("Index");
         }
 
         public JsonResult GetAllCourses()
         {
             var obj = _db.Course.ToList();
-/*            if (obj == null)
-            {
-                return NotFound();
-            }*/
-
             return Json(obj);
         }
 
+        [HttpGet("CourseData/{CourseId}")]
+        public async Task<IActionResult> CourseData(int CourseId)
+        {
+            var obj = _db.Course.Find(CourseId);
+            return Json(obj);
+        }
+
+        [HttpPost]
+        public IActionResult EditCourse(Course obj)
+        {
+            _db.Course.Update(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        //Delete
+        [HttpPost]
+        public IActionResult DeleteCourse(Course obj)
+        {
+            _db.Course.Remove(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
     }
 }

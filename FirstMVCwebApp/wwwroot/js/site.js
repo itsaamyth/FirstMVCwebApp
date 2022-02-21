@@ -54,9 +54,6 @@ $(document).ready(function () {
         $("#editImageUpload").show();
         $("#editProfileImg").hide();
         $("#editProfileImgBtn").hide();
-
-
-
     })
 
 })
@@ -95,7 +92,7 @@ $(document).ready(function () {
     })
 });
 
-/*View Data Using Ajax*/
+/*View Form Data Using Ajax*/
 $(document).ready(function () {
     $(function () {
         $(".view").click(function () {
@@ -112,8 +109,10 @@ $(document).ready(function () {
                         console.log(result)
 
                         var profileImg = result[0].profileImg
+                        $("#AlertLine").hide()
                         if (profileImg == '') {
                             profileImg = "https://img.icons8.com/color/96/000000/gender-neutral-user.png"
+                            $("#AlertLine").show()
                         }
                         $("#profileImg").attr("src", profileImg)
 
@@ -190,10 +189,14 @@ $(document).ready(function () {
                     // dataAjax: JSON.stringify(),
                     success: function (result) {
                         console.log(result)
+                        $("#editProfileImg").show();
+                        $("#editProfileImgBtn").show();
+                        $("#editImageUpload").hide()
 
                         var EditProfileImg = result[0].profileImg
                         if (EditProfileImg == '') {
                             EditProfileImg = "https://img.icons8.com/color/96/000000/gender-neutral-user.png"
+
                         }
                         $("#editProfileImg").attr("src", EditProfileImg)
 
@@ -262,84 +265,109 @@ $(document).ready(function () {
                     }
                 });
         })
+
+        $(".editCourse").click(function () {
+            var CourseId = $(this).closest("tr").find(".id").text().trim();
+            $.ajax(
+                {
+                    url: `/CourseData/${CourseId}`,
+                    type: "GET",
+                    async: false,
+                    dataType: "json",
+                    contentType: "application/json;",
+                    // dataAjax: JSON.stringify(),
+                    success: function (result) {
+                        console.log(result)
+                        let courseName = document.getElementById("courseName")
+                        courseName.value = result.courseName
+                        let editCourseId = document.getElementById("CourseId")
+                        editCourseId.value = result.courseId
+                        console.log("Success")
+                    }
+                });
+        });
+        $(".deleteCourse").click(function () {
+            var CourseId = $(this).closest("tr").find(".id").text().trim();
+            let deleteCourse = document.getElementById("deleteCourse");
+            deleteCourse.value = CourseId;
+            console.log(CourseId);
+        });
     }
     )
 })
 
+/*View Courses & Stream in Form Data Using Ajax & Multiple Entity Relationship */
 $(document).ready(function () {
-/*    Courses on Registration Page*/
-        $.ajax(
-            {
-                url: `/Course/GetAllCourses/`,
-                type: "GET",
-                async: false,
-                dataType: "json",
-                contentType: "application/json;",
-                // dataAjax: JSON.stringify(),
-                success: function (result) {
-                    $.each(result, function (key, value) {
-                        $('#UgCourse')
-                            .append($('<option>', { value: value.courseId })
-                                .text(value.courseName));
-                    });
-                }
-            },
-    );
-
-/*    Stream on Registration Page*/  
-        $.ajax(
-            {
-                url: `/Stream/GetAllStream/`,
-                type: "GET",
-                async: false,
-                dataType: "json",
-                contentType: "application/json;",
-                // dataAjax: JSON.stringify(),
-                success: function (result) {
-                    $.each(result, function (key, value) {
-                        $('#Stream')
-                            .append($('<option>', { value: value.streamId })
-                                .text(value.streamName));
-                    });
-                }
+    /*    Courses on Registration Page*/
+    $.ajax(
+        {
+            url: `/Course/GetAllCourses/`,
+            type: "GET",
+            async: false,
+            dataType: "json",
+            contentType: "application/json;",
+            // dataAjax: JSON.stringify(),
+            success: function (result) {
+                $.each(result, function (key, value) {
+                    $('#UgCourse')
+                        .append($('<option>', { value: value.courseId })
+                            .text(value.courseName));
+                });
             }
+        },
     );
-/*    Courses on Edit Page*/
-        $.ajax(
-            {
-                url: `/Course/GetAllCourses/`,
-                type: "GET",
-                async: false,
-                dataType: "json",
-                contentType: "application/json;",
-                // dataAjax: JSON.stringify(),
-                success: function (result) {
-                    $.each(result, function (key, value) {
-                        $('#EditUgCourse')
-                            .append($('<option>', { value: value.courseId })
-                                .text(value.courseName));
-                    });
-                }
-            },
-    );
-/*    Stream on Edit Page*/
-        $.ajax(
-            {
-                url: `/Stream/GetAllStream/`,
-                type: "GET",
-                async: false,
-                dataType: "json",
-                contentType: "application/json;",
-                // dataAjax: JSON.stringify(),
-                success: function (result) {
-                    $.each(result, function (key, value) {
-                        $('#EditStream')
-                            .append($('<option>', { value: value.streamId })
-                                .text(value.streamName));
-                    });
-                }
+    /*    Stream on Registration Page*/
+    $.ajax(
+        {
+            url: `/Stream/GetAllStream/`,
+            type: "GET",
+            async: false,
+            dataType: "json",
+            contentType: "application/json;",
+            // dataAjax: JSON.stringify(),
+            success: function (result) {
+                $.each(result, function (key, value) {
+                    $('#Stream')
+                        .append($('<option>', { value: value.streamId })
+                            .text(value.streamName));
+                });
             }
+        }
     );
-
-
+    /*    Courses on Edit Page*/
+    $.ajax(
+        {
+            url: `/Course/GetAllCourses/`,
+            type: "GET",
+            async: false,
+            dataType: "json",
+            contentType: "application/json;",
+            // dataAjax: JSON.stringify(),
+            success: function (result) {
+                $.each(result, function (key, value) {
+                    $('#EditUgCourse')
+                        .append($('<option>', { value: value.courseId })
+                            .text(value.courseName));
+                });
+            }
+        },
+    );
+    /*    Stream on Edit Page*/
+    $.ajax(
+        {
+            url: `/Stream/GetAllStream/`,
+            type: "GET",
+            async: false,
+            dataType: "json",
+            contentType: "application/json;",
+            // dataAjax: JSON.stringify(),
+            success: function (result) {
+                $.each(result, function (key, value) {
+                    $('#EditStream')
+                        .append($('<option>', { value: value.streamId })
+                            .text(value.streamName));
+                });
+            }
+        }
+    );
 })
