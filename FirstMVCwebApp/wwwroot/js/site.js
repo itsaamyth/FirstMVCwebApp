@@ -40,14 +40,6 @@ function EditAddressInput() {
     }
 }
 
-/*function changeProfileImg() {
-    let editProfileImgBtm = document.getElementById("editProfileImgBtn")
-    let editProfileImg = document.getElementById("editProfileImg")
-    let editImageUpload = document.getElementById("editImageUpload")
-
-    $("#editImageUpload").hide()
-}*/
-
 $(document).ready(function () {
     $("#editImageUpload").hide()
     $("#editProfileImgBtn").click(function () {
@@ -58,43 +50,11 @@ $(document).ready(function () {
 
 })
 
+/*View & Edit Form Data Using Ajax*/
 $(document).ready(function () {
     $(function () {
-  /*        Edit Function Using Html&Js */
- /*       $("").click(function () {
-            var StdId = $(this).closest("tr").find(".id").text().trim();
-            var firstName = $(this).closest("tr").find(".firstName").text().trim();
-            var lastName = $(this).closest("tr").find(".lastName").text().trim();
-            var gender = $(this).closest("tr").find(".gender").text().trim();
-            var email = $(this).closest("tr").find(".email").text().trim();
-            var phone = $(this).closest("tr").find(".phone").text().trim();
 
-            let editId = document.getElementById("StdId");
-            let editFirst = document.getElementById("edit1");
-            let editLast = document.getElementById("edit2");
-            let editEmail = document.getElementById("edit3");
-            let editPhone = document.getElementById("edit4");
-
-            editId.value = StdId;
-            editFirst.value = firstName;
-            editLast.value = lastName;
-            editEmail.value = email;
-            editPhone.value = phone;
-
-            console.log("success");
-        })*/
-        $(".delete").click(function () {
-            var StdId = $(this).closest("tr").find(".id").text().trim();
-            let delId = document.getElementById("StdId2");
-            delId.value = StdId;
-            console.log("success");
-        })
-    })
-});
-
-/*View Form Data Using Ajax*/
-$(document).ready(function () {
-    $(function () {
+        /* View Form Data Using Ajax*/
         $(".view").click(function () {
             var StdId = $(this).closest("tr").find(".id").text().trim();
             $.ajax(
@@ -173,10 +133,9 @@ $(document).ready(function () {
                         console.log("Success")
                     }
                 });
-            console.log("Midd Process")
         })
 
-       /* Edit Data Using Ajax*/
+       /* Edit Form Data Using Ajax*/
         $(".edit").click(function () {
             var StdId = $(this).closest("tr").find(".id").text().trim();
             $.ajax(
@@ -194,10 +153,10 @@ $(document).ready(function () {
                         $("#editImageUpload").hide()
 
                         var EditProfileImg = result[0].profileImg
-                        if (EditProfileImg == '') {
+/*                        if (EditProfileImg == '') {
                             EditProfileImg = "https://img.icons8.com/color/96/000000/gender-neutral-user.png"
 
-                        }
+                        }*/
                         $("#editProfileImg").attr("src", EditProfileImg)
 
                         let EditStdId = document.getElementById("StdId");
@@ -266,6 +225,15 @@ $(document).ready(function () {
                 });
         })
 
+        /* Delete Form Data Using Ajax*/
+        $(".delete").click(function () {
+            var StdId = $(this).closest("tr").find(".id").text().trim();
+            let delId = document.getElementById("StdId2");
+            delId.value = StdId;
+            console.log("success");
+        })
+
+        /* Edit and Delete Course Using Ajax*/
         $(".editCourse").click(function () {
             var CourseId = $(this).closest("tr").find(".id").text().trim();
             $.ajax(
@@ -291,6 +259,34 @@ $(document).ready(function () {
             let deleteCourse = document.getElementById("deleteCourse");
             deleteCourse.value = CourseId;
             console.log(CourseId);
+        });
+
+        /* Edit and Delete Stream Using Ajax*/
+        $(".editStream").click(function () {
+            var StreamId = $(this).closest("tr").find(".id").text().trim();
+            $.ajax(
+                {
+                    url: `/StreamData/${StreamId}`,
+                    type: "GET",
+                    async: false,
+                    dataType: "json",
+                    contentType: "application/json;",
+                    // dataAjax: JSON.stringify(),
+                    success: function (result) {
+                        console.log(result)
+                        let streamName = document.getElementById("streamName")
+                        streamName.value = result.streamName
+                        let editStreamId = document.getElementById("streamId")
+                        editStreamId.value = result.streamId
+                        console.log("Success Course Updated")
+                    }
+                });
+        });
+        $(".deleteStream").click(function () {
+            var StreamId = $(this).closest("tr").find(".id").text().trim();
+            let deleteStream = document.getElementById("deleteStream");
+            deleteStream.value = StreamId;
+            console.log("Stream :"+StreamId+"Deleted");
         });
     }
     )
@@ -371,3 +367,37 @@ $(document).ready(function () {
         }
     );
 })
+
+
+
+
+
+
+
+/*        Edit Form Data Using Html&Js without using AJAX*/
+/*$(document).ready(function () {
+    $(function () {
+        $("").click(function () {
+            var StdId = $(this).closest("tr").find(".id").text().trim();
+            var firstName = $(this).closest("tr").find(".firstName").text().trim();
+            var lastName = $(this).closest("tr").find(".lastName").text().trim();
+            var gender = $(this).closest("tr").find(".gender").text().trim();
+            var email = $(this).closest("tr").find(".email").text().trim();
+            var phone = $(this).closest("tr").find(".phone").text().trim();
+
+            let editId = document.getElementById("StdId");
+            let editFirst = document.getElementById("edit1");
+            let editLast = document.getElementById("edit2");
+            let editEmail = document.getElementById("edit3");
+            let editPhone = document.getElementById("edit4");
+
+            editId.value = StdId;
+            editFirst.value = firstName;
+            editLast.value = lastName;
+            editEmail.value = email;
+            editPhone.value = phone;
+
+            console.log("success");
+        })
+    })
+});*/

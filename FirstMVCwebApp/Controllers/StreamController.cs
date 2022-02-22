@@ -33,7 +33,8 @@ namespace FirstMVCwebApp.Controllers
         {
                 _db.Stream.Add(obj);
                 _db.SaveChanges();
-                return RedirectToAction("Index");
+            TempData["success"] = "Stream Added Successfully";
+            return RedirectToAction("Index");
         }
 
         public JsonResult GetAllStream()
@@ -45,6 +46,32 @@ namespace FirstMVCwebApp.Controllers
             }*/
 
             return Json(obj);
+        }
+
+        [HttpGet("StreamData/{StreamId}")]
+        public async Task<IActionResult> StreamData(int StreamId)
+        {
+            var obj = _db.Stream.Find(StreamId);
+            return Json(obj);
+        }
+
+        [HttpPost]
+        public IActionResult EditStream(Models.Stream obj)
+        {
+            _db.Stream.Update(obj);
+            _db.SaveChanges();
+            TempData["success"] = "Stream Updated Successfully";
+            return RedirectToAction("Index");
+        }
+
+        //Delete
+        [HttpPost]
+        public IActionResult DeleteStream(Models.Stream obj)
+        {
+            _db.Stream.Remove(obj);
+            _db.SaveChanges();
+            TempData["success"] = "Stream Deleted Successfully";
+            return RedirectToAction("Index");
         }
     }
 }

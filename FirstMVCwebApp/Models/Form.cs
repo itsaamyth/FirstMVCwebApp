@@ -40,7 +40,6 @@ namespace FirstMVCwebApp.Models
 
         public string ProfileImagePath { get; set; }
 
-
         [Required]
         public int TwelfthMarks { get; set; }
         [Required]

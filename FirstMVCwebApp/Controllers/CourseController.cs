@@ -34,7 +34,7 @@ namespace FirstMVCwebApp.Controllers
         {
             _db.Course.Add(obj);
             _db.SaveChanges();
-            TempData["success"] = "Course Addesd Successfully";
+            TempData["success"] = "Course Added Successfully";
             return RedirectToAction("Index");
         }
 
@@ -56,6 +56,7 @@ namespace FirstMVCwebApp.Controllers
         {
             _db.Course.Update(obj);
             _db.SaveChanges();
+            TempData["success"] = "Course Updated Successfully";
             return RedirectToAction("Index");
         }
 
@@ -65,6 +66,7 @@ namespace FirstMVCwebApp.Controllers
         {
             _db.Course.Remove(obj);
             _db.SaveChanges();
+            TempData["success"] = "Course Deleted Successfully";
             return RedirectToAction("Index");
         }
 

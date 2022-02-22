@@ -29,16 +29,21 @@ namespace FirstMVCwebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> FillFormAsync(Form obj)
         {
-            if(obj.ProfileImageLocal != null)
+            if (obj.ProfileImageLocal != null)
             {
                 string folder = "Profile/Pictures/";
-                folder += Guid.NewGuid().ToString()+obj.ProfileImageLocal.FileName;
-                string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath,folder);
+                folder += Guid.NewGuid().ToString() + obj.ProfileImageLocal.FileName;
+                string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
                 obj.ProfileImagePath = folder;
-                await obj.ProfileImageLocal.CopyToAsync(new FileStream(serverFolder,FileMode.Create)); ;
+                await obj.ProfileImageLocal.CopyToAsync(new FileStream(serverFolder, FileMode.Create)); ;
             }
+            else {
+                obj.ProfileImagePath = "Profile/Pictures/default.png";
+            }
+
             _db.FormData.Add(obj);
             _db.SaveChanges();
+            TempData["success"] = "Student Data Filled Successfully";
             return RedirectToAction("Index");
         }
 
@@ -50,7 +55,7 @@ namespace FirstMVCwebApp.Controllers
             {
 
                 string folder = "Profile/Pictures/";
-/*                Guid.NewGuid().ToString() Used to Generate random numbers along with String*/
+/*                Guid.NewGuid().ToString() is Used to Generate random numbers along with String*/
                 folder += Guid.NewGuid().ToString() + obj.ProfileImageLocal.FileName;
                 string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folder);
                 obj.ProfileImagePath = folder;
@@ -61,6 +66,7 @@ namespace FirstMVCwebApp.Controllers
             }
             _db.FormData.Update(obj);
             _db.SaveChanges();
+            TempData["success"] = "Student Data Updated Successfully";
             return RedirectToAction("Index");
         }
 
@@ -70,6 +76,7 @@ namespace FirstMVCwebApp.Controllers
         {
             _db.FormData.Remove(obj);
             _db.SaveChanges();
+            TempData["success"] = "Student Data Deleted Successfully";
             return RedirectToAction("Index");
         }
 

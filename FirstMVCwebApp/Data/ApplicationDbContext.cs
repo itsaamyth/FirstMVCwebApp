@@ -10,9 +10,6 @@ namespace FirstMVCwebApp.Data
 
         }
 
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Profile> Profiles { get; set; }
-
         public DbSet<Form> FormData { get; set; }
 
         public DbSet<Course> Course { get; set; }
